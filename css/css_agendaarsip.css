@@ -1,0 +1,482 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#fff;
+  color:#FD7335;
+}
+
+/* BACK BUTTON */
+.back-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  z-index:999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.back-button img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+/* SECTION */
+.agenda{
+  max-width:1400px;
+  margin:auto;
+  padding:60px 32px;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  margin-bottom:64px;
+}
+
+header h1{
+  font-size:50px;
+  font-weight:bold;
+}
+
+header p{
+  font-size:20px;
+  margin-top:10px;
+}
+
+/* GRID DESKTOP */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  column-gap:30px;
+  row-gap:70px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+  border:none;
+  box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 45px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.card-img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+/* CONTENT */
+.card-content{
+  padding:24px 26px; 
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.card p{
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* PAGINATION */
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:72px;
+}
+
+.pagination button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#ffe1d3;
+  color:#FD7335;
+  cursor:pointer;
+}
+
+.pagination button.active{
+  background:#FD7335;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* DETAIL */
+.detail{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+
+.detail.hidden{
+  display:none;
+}
+
+.detail > div{
+  background:#fff;
+  color:#333;
+  padding:28px;
+  border-radius:24px;
+  max-width:520px;
+  width:90%;
+  position:relative;
+}
+
+.detail img{
+  width:100%;
+  border-radius:16px;
+  margin-bottom:18px;
+}
+
+.detail button{
+  position:absolute;
+  top:14px;
+  right:14px;
+  border:none;
+  background:#FD7335;
+  color:#fff;
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  cursor:pointer;
+}
+
+/* ICON INFO */
+.info{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.info span{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  color:#FD7335;
+}
+
+.icon{
+  width:16px;
+  height:16px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+/* ================ FOOTER ================= */
+.footer{
+  background:#fff;
+  margin-top:5px;
+  font-family:Arial, sans-serif;
+  color:#000;
+}
+
+/* TOP */
+.footer-top{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:50px 80px 20px;
+}
+
+.footer-top img{
+  width:200px;
+}
+
+.footer-top h3{
+  font-size:30px;
+  font-weight:700;
+  line-height:1.4;
+}
+
+/* GRID */
+.footer-container{
+  display:grid;
+  grid-template-columns:1.3fr 1.5fr 1fr;
+  gap:40px;
+  padding:10px 80px 50px;
+  align-items:start;
+}
+
+.footer-left{
+  padding-left:30px;
+}
+
+.footer-info{
+  list-style:none;
+  padding-left:28px;
+  margin:0 0 20px;
+}
+
+.footer-info li{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  font-size:14px;
+  margin-bottom:12px;
+  line-height:1.5;
+}
+
+.footer-info img{
+  width:18px;
+  height:18px;
+}
+
+.footer-sosmed{
+  margin-top:18px;
+}
+
+.sosmed-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:14px;
+  margin-bottom:8px;
+  padding-left:30px;
+  color:black;
+}
+
+.sosmed-item img{
+  width:20px;
+}
+
+.footer-map iframe{
+  width:100%;
+  height:260px;
+  border:none;
+  border-radius:6px;
+}
+
+.footer-right{
+  border-left:3px solid #ff6a3d;
+  padding-left:24px;
+}
+
+.footer-right h4{
+  margin-bottom:16px;
+  font-size:16px;
+}
+
+.footer-right ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.footer-right li{
+  font-size:14px;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+.footer-right li a{
+  color:black;
+}
+
+.footer-right li:hover,
+.footer-right li a:hover{
+  color:#f9733a;
+}
+
+.visitor{
+  margin-top:20px;
+}
+
+.visitor img{
+  width:100%;
+  max-width:220px;
+}
+
+/* BOTTOM */
+.footer-bottom{
+  background:#ff6a3d;
+  color:white;
+  text-align:center;
+  padding:16px;
+  font-size:14px;
+}
+
+/* ================= MOBILE AGENDA ARSIP ================= */
+@media (max-width: 768px) {
+
+  .agenda-arsip {
+    padding: 60px 16px;
+  }
+
+  /* HEADER */
+  .arsip-header {
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+  }
+
+  .arsip-header h1 {
+    font-size: 36px;
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .arsip-header p {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  /* GRID 1 KOLOM */
+  .arsip-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  /* CARD CENTER & TIDAK KELEBARAN */
+  .arsip-card {
+    width: 100%;
+    max-width: 440px;   /* ⭐ kontrol lebar seperti desain kamu */
+    margin: 0 auto;     /* center */
+    border-radius: 22px;
+  }
+
+  .arsip-img {
+    height: 200px;
+  }
+
+  .arsip-content h3 {
+    font-size: 17px;
+  }
+
+  .arsip-content p {
+    font-size: 13px;
+  }
+
+  /* BUTTON */
+  .arsip-button {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .btn-arsip-fill,
+  .btn-arsip-outline {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+}
+
+/* ================= MOBILE FOOTER 1 KOLOM ================= */
+@media (max-width: 768px) {
+
+  .footer {
+    margin-top: 0 !important;
+    padding: 20px 0 30px;
+  }
+
+  /* WRAPPER LEBAR TERKONTROL */
+  .footer-top,
+  .footer-container,
+  .footer-bottom {
+    width: 92%;
+    max-width: 440px;   /* sama dengan card biar konsisten */
+    margin: 0 auto;
+  }
+
+  /* TOP */
+  .footer-top {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 0 0 14px 0;
+  }
+
+  .footer-top img {
+    width: 110px;   /* logo lebih besar */
+  }
+
+  .footer-top h3 {
+    font-size: 20px;   /* teks lebih besar */
+    line-height: 1.4;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .footer-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 0;
+  }
+
+  .footer-left,
+  .footer-right {
+    padding: 0;
+    border: none;
+  }
+
+  /* INFO */
+  .footer-info li {
+    font-size: 15px;
+  }
+
+  .sosmed-item {
+    font-size: 15px;
+    padding-left: 0;
+  }
+
+  /* MAP */
+  .footer-map iframe {
+    width: 100%;
+    height: 220px;
+  }
+
+  /* LINK TERKAIT */
+  .footer-right h4 {
+    font-size: 18px;
+  }
+
+  .footer-right li {
+    font-size: 15px;
+  }
+
+  /* VISITOR */
+  .visitor img {
+    max-width: 260px;
+  }
+
+  /* COPYRIGHT */
+  .footer-bottom {
+    margin-top: 18px;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+}

@@ -1,0 +1,574 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#f4f4f4;
+}
+
+/* BACK BUTTON */
+.back-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  z-index:999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.back-button img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+.hero{
+position:relative;
+height:400px;   /* sebelumnya 420 → kepanjangan */
+background:url("../assets/images/perpus.jpeg") center/cover no-repeat;
+display:flex;
+align-items:center;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+backdrop-filter:blur(3px);  
+background:rgba(0,0,0,0.05); 
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+color:white;
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+.hero h1{
+font-weight:800;
+font-size:42px;
+margin-bottom:50px;
+}
+
+/* PERPUS GRID */
+.perpus-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:50px;
+}
+
+.perpus-card{
+background:rgba(255,255,255,0.15);
+padding:28px 32px;
+border-radius:14px;
+backdrop-filter:blur(4px);
+height:170px;
+display:flex;
+flex-direction:column;
+gap:2px;
+}
+
+.perpus-card h3{
+margin-bottom:10px;
+}
+
+/* LAYANAN */
+.layanan-title{
+display:inline-block;
+color:#FF6B2C;
+font-weight:800;
+font-size:42px;
+background: rgba(255,255,255,0.15);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border-radius:16px;
+margin-top:40px;
+margin-bottom: 24px;
+}
+
+.layanan{
+max-width:1200px;
+font-size:42px;
+margin:-5px auto 0 auto; 
+padding:20px 10px 30px;
+}
+
+.layanan h2{
+font-size:36px;
+margin-bottom:30px;
+color:#333;
+}
+
+.layanan-section{
+background:#F5F6F8;
+margin-top:-px; /* naik ke atas */
+border-top-left-radius:40px;
+border-top-right-radius:40px;
+position:relative;
+z-index:2;
+padding: 0px 0 180px;
+}
+
+.container{
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 60px;
+}
+
+.layanan-container{
+width:90%;
+max-width:1400px;
+margin:auto;
+}
+
+/* SIPUS CARD */
+.sipus-card{
+  background:#FF6B2C;
+  color:white;
+
+  border-radius:24px;
+  padding:28px;
+
+  display:flex;
+  align-items:center;
+  gap:24px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.sipus-card:hover{
+  transform:translateY(-4px);
+}
+
+/* LEFT */
+.sipus-left{
+display:flex;
+align-items:center;
+gap:16px;
+min-width:260px;
+}
+
+.sipus-icon{
+width:50px;
+height:50px;
+}
+
+.sipus-icon svg{
+width:100%;
+height:100%;
+}
+
+/* TEXT */
+.sipus-left h3{
+font-size:24px;
+}
+
+.sipus-left p{
+font-size:14px;
+opacity:.9;
+}
+
+.sipus-desc{
+flex:1;
+font-size:15px;
+line-height:2;
+padding:0 24px;
+border-left:1px solid rgba(255, 255, 255, 0.907);
+border-right:1px solid rgba(255,255,255,0.907);
+}
+
+.sipus-arrow{
+font-size:28px;
+min-width:60px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+.perpus-grid{
+grid-template-columns:1fr;
+}
+
+.sipus-card{
+flex-direction:column;
+align-items:flex-start;
+width:100%;
+}
+}
+
+.info-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:6px;
+}
+
+.icon{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+
+  body{
+    background:#f5f6f8;
+  }
+
+  /* Semua wrapper ikut lebar mobile */
+  .hero-content,
+  .layanan,
+  .layanan-container,
+  .container{
+    width:92% !important;
+    max-width:none !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+
+  /* HERO */
+  .hero{
+    height:280px; /* lebih pas, tidak terlalu tinggi */
+  }
+
+  /* Turunkan hero-content sedikit supaya tombol back tidak nutup */
+  .hero-content{
+    margin-top:50px; /* pas, tidak terlalu turun */
+  }
+
+  .hero h1{
+    font-size:24px;
+    margin-bottom:20px;
+  }
+
+  /* PERPUS GRID → 2 CARD MUAT */
+  .perpus-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+
+  .perpus-card{
+    height:auto;
+    padding:12px;   /* card lebih kecil */
+    border-radius:12px;
+  }
+
+  .perpus-card h3{
+    font-size:15px;
+  }
+
+  .perpus-card p{
+    font-size:12px;
+    line-height:1.4;
+  }
+
+  .info-row{
+    gap:4px;
+    margin-top:4px;
+  }
+
+  .icon{
+    width:14px;
+    height:14px;
+  }
+
+  /* LAYANAN */
+  .layanan-title{
+    font-size:24px;
+    margin-top:16px;
+    margin-bottom:12px;
+  }
+
+  .layanan h2{
+    font-size:20px;
+    margin-bottom:14px;
+  }
+
+  .layanan-section{
+    padding-bottom:50px;
+  }
+
+  /* SIPUS CARD */
+  .sipus-card{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    padding:12px;
+    border-radius:14px;
+  }
+
+  .sipus-left{
+    min-width:auto;
+  }
+
+  .sipus-left h3{
+    font-size:16px;
+  }
+
+  .sipus-left p{
+    font-size:12px;
+  }
+
+  .sipus-desc{
+    border:none;
+    padding:0;
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  .sipus-arrow{
+    align-self:flex-end;
+    font-size:20px;
+  }
+
+  /* BACK BUTTON */
+  .back-button{
+    top:12px;
+    left:12px;
+    width:36px;
+    height:36px;
+  }
+
+  .back-button img{
+    width:16px;
+  }
+
+}
+
+/* ================ FOOTER ================= */
+.footer {
+  background: #fff;
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BARIS ATAS ===== */
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 80px 20px;
+}
+
+.footer-top img {
+  width: 200px;
+}
+
+.footer-top h3 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== 3 KOLOM ===== */
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1fr;
+  gap: 40px;
+  padding: 10px 80px 50px;
+  align-items: start;
+}
+
+/* INFO KONTAK */
+.footer-info {
+  list-style: none;
+  padding-left: 28px; /* 🔥 bikin konten geser ke kanan */
+  margin: 0 0 20px;
+}
+
+/* Blok kiri agak masuk */
+.footer-left {
+  padding-left: 35px;
+}
+
+/* Kontak */
+.footer-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.footer-info img {
+  width: 18px;
+  height: 18px;
+}
+
+/* SOSMED */
+
+/* Judul Sosial Media sejajar teks (tanpa ikon tapi tetap pakai kolom ikon kosong) */
+.sosmed-title-row span {
+  font-weight: 600;
+}
+
+/* Item sosial media sejajar dengan kontak */
+.sosmed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-left: 30px; /* 🔥 sejajar dengan teks kontak */
+}
+
+.sosmed-item img {
+  width: 20px;
+}
+
+.footer-left {
+  padding-left: 30px; /* atur 20–50px sesuai selera */
+}
+
+/* Sosial media ikut sejajar */
+.footer-sosmed {
+  margin-top: 18px;
+}
+
+/* MAP */
+.footer-map iframe {
+  width: 100%;
+  height: 260px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* KANAN */
+.footer-right {
+  border-left: 3px solid #ff6a3d;
+  padding-left: 24px;
+}
+
+.footer-right h4 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-right li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-right li:hover {
+  color: #ff6a3d;
+}
+
+/* VISITOR */
+.visitor {
+  margin-top: 20px;
+}
+
+.visitor img {
+  width: 100%;
+  max-width: 220px;
+}
+/* Link Terkait Footer */
+.footer-right ul li a {
+  color: black;
+}
+
+.footer-right ul li a:hover {
+  color: #f9733a;
+}
+
+/* Sosial Media */
+.sosmed-item {
+  color: black;
+}
+
+.sosmed-item:hover {
+  color: #f9733a;
+}
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  background: #ff6a3d;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+
+  white-space:nowrap;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* RAPATKAN HANYA SECTION SEBELUM FOOTER */
+  .artikel-berita {
+    margin-bottom: 0 !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* FOOTER RAPAT KE ATAS */
+  .footer {
+    margin-top: 0 !important;
+    padding: 10px 0 20px 0 !important;
+  }
+
+  /* LOGO + NAMA KE KIRI */
+  .footer-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 5px 15px 10px 10px;
+    margin: 0;
+  }
+
+  .footer-top img {
+    width: 85px;
+  }
+
+  .footer-top h3 {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 10px 15px;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-right {
+    padding: 0;
+    border: none;
+  }
+
+}

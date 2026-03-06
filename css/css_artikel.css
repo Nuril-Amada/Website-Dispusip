@@ -1,0 +1,447 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#f2f2f2;
+}
+
+/* BACK BUTTON */
+.back-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  z-index:999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.back-button img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+/* HEADER BIRU */
+.header-blue{
+  height:160px;
+  background:#fd7335;
+}
+
+/* CONTAINER */
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:-80px auto 80px auto;
+  display:flex;
+  gap:40px;
+}
+
+/* LEFT */
+.content-left{
+  flex:2;
+}
+
+.card-detail{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+.card-detail h1{
+  font-size:24px;
+  margin-bottom:15px;
+  line-height:1.4;
+}
+
+/* META */
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.meta-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  color:#666;
+}
+
+.meta-item img{
+  width:16px;
+}
+
+.main-image{
+  width:100%;
+  border-radius:15px;
+  margin:15px 0 20px;
+}
+
+/* TEXT CONTENT */
+.card-detail p{
+  font-size:15px;
+  line-height:1.8;
+  color:#333;
+  margin-bottom:15px;
+  text-align:justify;   /* <<< BIAR RATA KANAN KIRI */
+}
+
+/* RIGHT */
+.content-right{
+  flex:1;
+}
+
+.card-sidebar{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+.card-sidebar h3{
+  margin-bottom:20px;
+}
+
+.sidebar-item{
+  margin-bottom:18px;
+  padding-bottom:15px;
+  border-bottom:1px solid #eee;
+}
+
+.sidebar-item:last-child{
+  border-bottom:none;
+}
+
+.sidebar-item p{
+  font-size:14px;
+  line-height:1.5;
+}
+
+.small{
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .container{
+    flex-direction:column;
+  }
+
+  .back-button{
+    top:15px;
+    left:15px;
+  }
+}
+
+/* ================= MOBILE DETAIL PAGE ================= */
+@media (max-width: 768px){
+
+  body{
+    background:#f5f6f8;
+  }
+
+  /* HEADER */
+  .header-blue{
+    height:120px;
+  }
+
+  /* CONTAINER JADI 1 KOLOM */
+  .container{
+    width:92%;
+    margin:-60px auto 40px auto;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  /* CARD UTAMA */
+  .card-detail{
+    padding:20px;
+    border-radius:16px;
+  }
+
+  .card-detail h1{
+    font-size:20px;
+    line-height:1.4;
+  }
+
+  /* META */
+  .meta{
+    gap:12px;
+  }
+
+  .meta-item{
+    font-size:13px;
+  }
+
+  /* GAMBAR */
+  .main-image{
+    margin:12px 0 16px;
+    border-radius:12px;
+  }
+
+  /* TEKS */
+  .card-detail p{
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  /* SIDEBAR JADI CARD BAWAH */
+  .content-right{
+    width:100%;
+  }
+
+  .card-sidebar{
+    padding:20px;
+    border-radius:16px;
+  }
+
+  .card-sidebar h3{
+    font-size:18px;
+    margin-bottom:14px;
+  }
+
+  .sidebar-item p{
+    font-size:14px;
+  }
+
+  .small{
+    font-size:12px;
+  }
+
+  /* BACK BUTTON */
+  .back-button{
+    top:12px;
+    left:12px;
+    width:38px;
+    height:38px;
+  }
+
+  .back-button img{
+    width:18px;
+  }
+
+}
+
+/* ================ FOOTER ================= */
+.footer {
+  background: #fff;
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BARIS ATAS ===== */
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 80px 20px;
+}
+
+.footer-top img {
+  width: 200px;
+}
+
+.footer-top h3 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== 3 KOLOM ===== */
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1fr;
+  gap: 40px;
+  padding: 10px 80px 50px;
+  align-items: start;
+}
+
+/* INFO KONTAK */
+.footer-info {
+  list-style: none;
+  padding-left: 28px; /* 🔥 bikin konten geser ke kanan */
+  margin: 0 0 20px;
+}
+
+/* Blok kiri agak masuk */
+.footer-left {
+  padding-left: 35px;
+}
+
+/* Kontak */
+.footer-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.footer-info img {
+  width: 18px;
+  height: 18px;
+}
+
+/* SOSMED */
+
+/* Judul Sosial Media sejajar teks (tanpa ikon tapi tetap pakai kolom ikon kosong) */
+.sosmed-title-row span {
+  font-weight: 600;
+}
+
+/* Item sosial media sejajar dengan kontak */
+.sosmed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-left: 30px; /* 🔥 sejajar dengan teks kontak */
+}
+
+.sosmed-item img {
+  width: 20px;
+}
+
+.footer-left {
+  padding-left: 30px; /* atur 20–50px sesuai selera */
+}
+
+/* Sosial media ikut sejajar */
+.footer-sosmed {
+  margin-top: 18px;
+}
+
+/* MAP */
+.footer-map iframe {
+  width: 100%;
+  height: 260px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* KANAN */
+.footer-right {
+  border-left: 3px solid #ff6a3d;
+  padding-left: 24px;
+}
+
+.footer-right h4 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-right li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-right li:hover {
+  color: #ff6a3d;
+}
+
+/* VISITOR */
+.visitor {
+  margin-top: 20px;
+}
+
+.visitor img {
+  width: 100%;
+  max-width: 220px;
+}
+/* Link Terkait Footer */
+.footer-right ul li a {
+  color: black;
+}
+
+.footer-right ul li a:hover {
+  color: #f9733a;
+}
+
+/* Sosial Media */
+.sosmed-item {
+  color: black;
+}
+
+.sosmed-item:hover {
+  color: #f9733a;
+}
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  background: #ff6a3d;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+
+  white-space:nowrap;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* FOOTER RAPAT KE ATAS */
+  .footer {
+    margin-top: 0 !important;
+    padding: 10px 0 20px 0 !important;
+  }
+
+  /* LOGO + NAMA KE KIRI */
+  .footer-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 5px 15px 10px 10px;
+    margin: 0;
+  }
+
+  .footer-top img {
+    width: 85px;
+  }
+
+  .footer-top h3 {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 10px 15px;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-right {
+    padding: 0;
+    border: none;
+  }
+
+}

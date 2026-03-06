@@ -1,0 +1,446 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #e9e9ee;
+  line-height: 1.6;
+}
+
+/* ================= VISI MISI ================= */
+/* BACK BUTTON */
+.back-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  z-index:999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.back-button img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+.visi-misi-container {
+  background: #1aa3b0;
+  padding: 60px 20px 140px;
+  text-align: center;
+  position: relative;
+}
+
+/* Layer abu muda bawah */
+.visi-misi-container::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: #d3ecf3;
+  z-index: 0;
+}
+
+.visi-box {
+  color: white;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.visi-box h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.visi-box p {
+  font-size: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* ================= MISI CARD ================= */
+
+.misi-box {
+  background: white;
+  max-width: 850px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  text-align: left;
+  position: relative;
+  z-index: 3;
+}
+
+.misi-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1aa3b0;
+  font-size: 22px;
+}
+
+.misi-box ol {
+  padding-left: 20px;
+}
+
+.misi-box li {
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+/* ================= TENTANG DINAS ================= */
+
+.tentang-dinas {
+  padding: 120px 20px 80px;
+  background: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Judul Box Biru */
+.judul-section {
+  background: #1aa3b0;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  max-width: 2000px;
+  margin: -140px auto 40px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.judul-section h2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Konten */
+.konten-dinas {
+  max-width: 850px;
+  margin: auto;
+  font-size: 15px;
+  color: #333;
+}
+
+.konten-dinas h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.konten-dinas ol {
+  padding-left: 20px;
+}
+
+.konten-dinas li {
+  margin-bottom: 8px;
+}
+
+.highlight {
+  color: #1aa3b0;
+  font-weight: bold;
+}
+
+/* ================= MOBILE VERSION ================= */
+@media (max-width: 768px) {
+
+  /* BACK BUTTON */
+  .back-button {
+    width: 38px;
+    height: 38px;
+    top: 15px;
+    left: 15px;
+  }
+
+  .back-button img {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* VISI MISI SECTION */
+  .visi-misi-container {
+    padding: 50px 15px 120px;
+  }
+
+  .visi-box h2 {
+    font-size: 20px;
+  }
+
+  .visi-box p {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  /* MISI CARD */
+  .misi-box {
+    padding: 25px 20px;
+    border-radius: 14px;
+  }
+
+  .misi-box h2 {
+    font-size: 18px;
+  }
+
+  .misi-box li {
+    font-size: 14px;
+  }
+
+  /* TENTANG DINAS */
+  .tentang-dinas {
+    padding: 100px 15px 60px;
+  }
+
+  /* JUDUL SECTION */
+  .judul-section {
+    padding: 20px;
+    margin: -110px 15px 30px;
+    border-radius: 12px;
+  }
+
+  .judul-section h2 {
+    font-size: 18px;
+  }
+
+  /* KONTEN */
+  .konten-dinas {
+    font-size: 14px;
+    padding: 0 5px;
+  }
+
+  .konten-dinas h3 {
+    font-size: 15px;
+  }
+
+  .konten-dinas li {
+    font-size: 14px;
+  }
+
+}
+
+/* ================ FOOTER ================= */
+.footer {
+  background: #fff;
+  margin-top: 80px;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BARIS ATAS ===== */
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 80px 20px;
+}
+
+.footer-top img {
+  width: 200px;
+}
+
+.footer-top h3 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== 3 KOLOM ===== */
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1fr;
+  gap: 40px;
+  padding: 10px 80px 50px;
+  align-items: start;
+}
+
+/* INFO KONTAK */
+.footer-info {
+  list-style: none;
+  padding-left: 28px; /* 🔥 bikin konten geser ke kanan */
+  margin: 0 0 20px;
+}
+
+/* Blok kiri agak masuk */
+.footer-left {
+  padding-left: 35px;
+}
+
+/* Kontak */
+.footer-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.footer-info img {
+  width: 18px;
+  height: 18px;
+}
+
+/* SOSMED */
+
+/* Judul Sosial Media sejajar teks (tanpa ikon tapi tetap pakai kolom ikon kosong) */
+.sosmed-title-row span {
+  font-weight: 600;
+}
+
+/* Item sosial media sejajar dengan kontak */
+.sosmed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-left: 30px; /* 🔥 sejajar dengan teks kontak */
+}
+
+.sosmed-item img {
+  width: 20px;
+}
+
+.footer-left {
+  padding-left: 30px; /* atur 20–50px sesuai selera */
+}
+
+/* Sosial media ikut sejajar */
+.footer-sosmed {
+  margin-top: 18px;
+}
+
+/* MAP */
+.footer-map iframe {
+  width: 100%;
+  height: 260px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* KANAN */
+.footer-right {
+  border-left: 3px solid #ff6a3d;
+  padding-left: 24px;
+}
+
+.footer-right h4 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-right li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-right li:hover {
+  color: #ff6a3d;
+}
+
+/* VISITOR */
+.visitor {
+  margin-top: 20px;
+}
+
+.visitor img {
+  width: 100%;
+  max-width: 220px;
+}
+/* Link Terkait Footer */
+.footer-right ul li a {
+  color: black;
+}
+
+.footer-right ul li a:hover {
+  color: #f9733a;
+}
+
+/* Sosial Media */
+.sosmed-item {
+  color: black;
+}
+
+.sosmed-item:hover {
+  color: #f9733a;
+}
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  background: #ff6a3d;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+  white-space:nowrap;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* RAPATKAN HANYA SECTION SEBELUM FOOTER */
+  .artikel-berita {
+    margin-bottom: 0 !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* FOOTER RAPAT KE ATAS */
+  .footer {
+    margin-top: 0 !important;
+    padding: 10px 0 20px 0 !important;
+  }
+
+  /* LOGO + NAMA KE KIRI */
+  .footer-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 5px 15px 10px 10px;
+    margin: 0;
+  }
+
+  .footer-top img {
+    width: 85px;
+  }
+
+  .footer-top h3 {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 10px 15px;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-right {
+    padding: 0;
+    border: none;
+  }
+
+}

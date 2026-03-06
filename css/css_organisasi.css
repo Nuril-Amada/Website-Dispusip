@@ -1,0 +1,471 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #dedbd6;
+}
+
+/* ================= HEADER ================= */
+
+.header-organisasi {
+  background: #f9733a;
+  padding: 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+}
+
+.header-organisasi h1 {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* ================= CONTAINER ================= */
+
+/* BACK BUTTON */
+.back-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  z-index:999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.back-button img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+.struktur-container {
+  padding: 60px 40px;
+}
+
+/* Info kiri */
+
+.info-box {
+  max-width: 350px;
+  margin-bottom: 40px;
+}
+
+.label {
+  background: #38b6b6;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.info-box h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.info-box p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Diagram */
+
+.diagram {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+
+.box {
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+  font-size: 14px;
+  max-width: 260px;
+}
+
+/* Warna box sesuai gambar */
+
+.kepala {
+  background: #f4a261;
+}
+
+.fungsional {
+  background: #a8dadc;
+}
+
+.sekretaris {
+  background: #bde0fe;
+}
+
+.kecil {
+  background: #f7c59f;
+  font-size: 12px;
+}
+
+.bidang {
+  background: #ffe08a;
+  font-size: 12px;
+}
+
+.bawah {
+  background: #a8d8f0;
+  font-size: 11px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ================= DIAGRAM PRESISI FIX ================= */
+
+.diagram {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* LEVEL UMUM */
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 30px 0;
+  position: relative;
+}
+
+/* BOX */
+.box {
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+  font-size: 14px;
+  width: 230px;
+  text-align: center;
+}
+
+/* WARNA */
+.kepala { background: #f4a261; }
+.fungsional { background: #a8dadc; }
+.sekretaris { background: #bde0fe; }
+.kecil { background: #f7c59f; font-size: 12px; }
+.bidang { background: #ffe08a; font-size: 12px; }
+.bawah { background: #a8d8f0; font-size: 11px; }
+
+/* ================= GARIS ================= */
+
+/* Garis vertikal */
+.line-vertical {
+  width: 3px;
+  height: 40px;
+  background: #444;
+  margin: 0 auto;
+}
+
+/* Garis horizontal otomatis mengikuti isi */
+.level.has-line::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background: #444;
+}
+
+/* Level paling bawah TIDAK boleh wrap */
+.level-4 {
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* ================= MOBILE SUPER MINI ================= */
+@media (max-width: 768px) {
+
+  .struktur-container {
+    padding: 20px 5px;
+  }
+
+  /* Tetap horizontal & lebih rapat */
+  .level {
+    gap: 6px;
+    margin: 14px 0;
+    flex-wrap: nowrap;
+  }
+
+  /* Box super kecil */
+  .box {
+    width: 72px;              /* makin kecil */
+    padding: 6px 4px;
+    font-size: 8px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+  }
+
+  /* Sub level lebih kecil lagi */
+  .kecil,
+  .bidang {
+    font-size: 7px;
+  }
+
+  .bawah {
+    font-size: 6.5px;
+  }
+
+  /* Garis lebih tipis & pendek */
+  .line-vertical {
+    height: 14px;
+    width: 2px;
+  }
+
+  .level.has-line::before {
+    height: 2px;
+    top: -10px;
+  }
+
+  /* Header kecil */
+  .header-organisasi h1 {
+    font-size: 18px;
+  }
+
+}
+
+/* ================ FOOTER ================= */
+.footer {
+  background: #fff;
+  margin-top: 80px;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== BARIS ATAS ===== */
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 80px 20px;
+}
+
+.footer-top img {
+  width: 200px;
+}
+
+.footer-top h3 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== 3 KOLOM ===== */
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1fr;
+  gap: 40px;
+  padding: 10px 80px 50px;
+  align-items: start;
+}
+
+/* INFO KONTAK */
+.footer-info {
+  list-style: none;
+  padding-left: 28px; /* 🔥 bikin konten geser ke kanan */
+  margin: 0 0 20px;
+}
+
+/* Blok kiri agak masuk */
+.footer-left {
+  padding-left: 35px;
+}
+
+/* Kontak */
+.footer-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.footer-info img {
+  width: 18px;
+  height: 18px;
+}
+
+/* SOSMED */
+
+/* Judul Sosial Media sejajar teks (tanpa ikon tapi tetap pakai kolom ikon kosong) */
+.sosmed-title-row span {
+  font-weight: 600;
+}
+
+/* Item sosial media sejajar dengan kontak */
+.sosmed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-left: 30px; /* 🔥 sejajar dengan teks kontak */
+}
+
+.sosmed-item img {
+  width: 20px;
+}
+
+.footer-left {
+  padding-left: 30px; /* atur 20–50px sesuai selera */
+}
+
+/* Sosial media ikut sejajar */
+.footer-sosmed {
+  margin-top: 18px;
+}
+
+/* MAP */
+.footer-map iframe {
+  width: 100%;
+  height: 260px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* KANAN */
+.footer-right {
+  border-left: 3px solid #ff6a3d;
+  padding-left: 24px;
+}
+
+.footer-right h4 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-right li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-right li:hover {
+  color: #ff6a3d;
+}
+
+/* VISITOR */
+.visitor {
+  margin-top: 20px;
+}
+
+.visitor img {
+  width: 100%;
+  max-width: 220px;
+}
+/* Link Terkait Footer */
+.footer-right ul li a {
+  color: black;
+}
+
+.footer-right ul li a:hover {
+  color: #f9733a;
+}
+
+/* Sosial Media */
+.sosmed-item {
+  color: black;
+}
+
+.sosmed-item:hover {
+  color: #f9733a;
+}
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  background: #ff6a3d;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+  white-space:nowrap;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* RAPATKAN HANYA SECTION SEBELUM FOOTER */
+  .artikel-berita {
+    margin-bottom: 0 !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* FOOTER RAPAT KE ATAS */
+  .footer {
+    margin-top: 0 !important;
+    padding: 10px 0 20px 0 !important;
+  }
+
+  /* LOGO + NAMA KE KIRI */
+  .footer-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 5px 15px 10px 10px;
+    margin: 0;
+  }
+
+  .footer-top img {
+    width: 85px;
+  }
+
+  .footer-top h3 {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 10px 15px;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-right {
+    padding: 0;
+    border: none;
+  }
+
+}
+

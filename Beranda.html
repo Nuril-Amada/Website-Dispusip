@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DISPUSIP Surabaya</title>
+  <link rel="stylesheet" href="css/css_beranda.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <img src="assets/images/logo-surabaya.png" class="logo-equal">
+    <img src="assets/images/logo-dispusip.png" class="logo-equal">
+    <span class="title">
+      Dinas Perpustakaan dan Kearsipan <br>Kota Surabaya
+    </span>
+  </div>
+
+  <!-- HAMBURGER -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <!-- MENU -->
+  <ul class="navbar-menu" id="navMenu">
+    <li><a href="Beranda.html">Beranda</a></li>
+
+    <li class="nav-item has-dropdown">
+  <a href="#">DISPUSIP SBY <span class="arrow">▼</span></a>
+  <ul class="dropdown-menu">
+    <li><a href="visi-misi.html">Visi Misi</a></li>
+    <li><a href="organisasi.html">Struktur Organisasi</a></li>
+    <li><a href="https://jdih.surabaya.go.id/" target="_blank">
+    Perundang-undangan
+  </a></li>
+  </ul>
+</li>
+
+    <li class="nav-item has-dropdown">
+  <a href="#">Perpustakaan ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="perpustakaan.html">Profil Perpustakaan</a></li>
+    <li><a href="https://sipus.surabaya.go.id/">SIPUS</a></li>
+  </ul>
+</li>
+
+    <li class="nav-item has-dropdown">
+  <a href="#">Kearsipan ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="arsip.html">Profil Kearsipan</a></li>
+    <li><a href="https://earsip.surabaya.go.id/">E-Arsip</a></li>
+    <li><a href="https://dispusip.surabaya.go.id/virtual/">SiManis</a></li>
+  </ul>
+</li>
+
+<li class="nav-item has-dropdown">
+  <a href="#">Publikasi ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="berita.html">Berita</a></li>
+    <li><a href="artikel.html">Artikel</a></li>
+    <li><a href="karya.html">Karya</a></li>
+  </ul>
+</li>
+
+<li>
+  <a href="https://sipus.surabaya.go.id/maps" target="_blank">
+    Lokasi Layanan
+  </a>
+</li>
+
+<li class="nav-item has-dropdown dropdown-right">
+  <a href="#">Infomasi Publik ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="https://ppid.surabaya.go.id/">PPID</a></li>
+    <li><a href="https://ckan.surabaya.go.id/dataset/?organization=dispusip">Satu Data</a></li>
+    <li><a href="Dashboard.html">Dashboard Layanan Statistik</a></li>
+    <li><a href="karya.html">Indeks Kepuasan Masyarakat</a></li>
+    <li><a href="media center https://mediacenter.surabaya.go.id/">Media Center (Pengaduan)</a></li>
+    <li><a href="https://skm.surabaya.go.id/">Survey Kepuasan Masyarakat</a></li>
+  </ul>
+</li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="slider" id="slider">
+    <img src="assets/images/poster1.png">
+    <img src="assets/images/poster2.png">
+    <img src="assets/images/poster3.png">
+    <img src="assets/images/poster4.png">
+  </div>
+</section>
+
+<section class="spacer-biru"></section>
+
+<!-- ================= RINGKASAN ================= -->
+ <!-- SPACER ANTARA POSTER & RINGKASAN -->
+
+<section class="ringkasan-wrapper">
+    
+    <!-- Judul -->
+    <div class="ringkasan-header">
+      <h2>Ringkasan Statistik</h2>
+    </div>
+
+    <!-- Card Statistik -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <h3>1,025</h3>
+        <p>Jumlah Pengunjung<br>Perpustakaan</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>2,100</h3>
+        <p>Jumlah Buku<br>Dispusip Kota Surabaya</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>1,150</h3>
+        <p>Jumlah Arsip<br>Dispusip Kota Surabaya</p>
+      </div>
+    </div>
+
+    <!-- Kepuasan -->
+    <div class="kepuasan">
+      <div class="kepuasan-left">
+        <h1>99,39%</h1>
+        <p>
+          Tingkat Kepuasan Masyarakat<br>
+          Januari 2026
+        </p>
+      </div>
+
+      <div class="kepuasan-right">
+        <h4>Kategori A (Sangat Baik)</h4>
+        <p>
+          Tingkat kepuasan berdasarkan survei kepuasan masyarakat
+          terhadap pelayanan Dispusip Kota Surabaya selama satu
+          bulan terakhir.
+        </p>
+
+        <button>Dashboard Statistik Selengkapnya</button>
+      </div>
+    </div>
+
+  </section>
+
+<!-- ================= AGENDA ================= -->
+<section class="agenda">
+  <div class="agenda-container popup">
+
+    <!-- HEADER -->
+    <div class="agenda-header">
+      <h1>Agenda<br>Literasi</h1>
+      <p>
+        Informasi terjadwal kegiatan literasi yang diselenggarakan
+        Dinas Perpustakaan dan Kearsipan Kota Surabaya untuk
+        mendorong partisipasi serta budaya literasi masyarakat.
+      </p>
+    </div>
+
+    <!-- CARD GRID -->
+    <div class="agenda-grid">
+      <div class="row">
+        
+          <div class="col-md-4">
+              <div class="agenda-card">
+                <img src="assets/images/agenda1.png" class="agenda-img">
+                <div class="agenda-content">
+                  <h3>Kompetisi Warga Menulis</h3>
+                  <div class="agenda-info">
+                    <p><img src="assets/icons/calendar.svg"> 1–28 Februari 2026</p>
+                    <p><img src="assets/icons/pin.svg"> Perpustakaan Umum Balai Pemuda Kota Surabaya</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="agenda-card">
+                <img src="assets/images/agenda2.png" class="agenda-img">
+                <div class="agenda-content">
+                  <h3>Wisata Buku TK Anak Mandiri</h3>
+                  <div class="agenda-info">
+                    <p><img src="assets/icons/calendar.svg"> 31 Januari 2026</p>
+                    <p><img src="assets/icons/pin.svg"> Perpustakaan Umum Rungkut Surabaya</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="agenda-card">
+                <img src="assets/images/agenda3.png" class="agenda-img">
+                <div class="agenda-content">
+                  <h3>Layanan Membaca Taman Cahaya</h3>
+                  <div class="agenda-info">
+                    <p><img src="assets/icons/calendar.svg"> Setiap Hari</p>
+                    <p><img src="assets/icons/pin.svg"> Jl. Raya Pakal Surabaya No.27</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- BUTTON -->
+<div class="agenda-button">
+  <a href="pusling.html" class="btn-outline">
+    Jadwal Mobil Perpustakaan Keliling
+  </a>
+
+  <a href="agendaliterasi.html" class="btn-fill">
+    Lihat Semua Agenda
+  </a>
+</div>
+
+  </div>
+</section>
+
+<!-- ================= AGENDA ARSIP ================= -->
+<section class="agenda-arsip">
+  <div class="arsip-container popup">
+
+    <!-- HEADER -->
+    <div class="arsip-header">
+      <h1>Agenda<br>Arsip</h1>
+      <p>
+        Informasi terjadwal kegiatan kearsipan yang diselenggarakan
+        Dinas Perpustakaan dan Kearsipan Kota Surabaya untuk
+        mendukung budaya tertib arsip dan peningkatan literasi
+        kearsipan.
+      </p>
+    </div>
+
+    <!-- GRID -->
+    <div class="arsip-grid">
+
+      <div class="arsip-card">
+        <img src="assets/images/arsip1.png" class="arsip-img">
+        <div class="arsip-content">
+          <div class="arsip-line"></div>
+          <h3>Pendampingan Arsip Intensif</h3>
+          <p><img src="assets/icons/calendar-orange.svg"> 6 Februari 2026</p>
+          <p><img src="assets/icons/pin-orange.svg"> Dinas Ketahanan Pangan dan Pertanian</p>
+        </div>
+      </div>
+
+      <div class="arsip-card">
+        <img src="assets/images/arsip2.png" class="arsip-img">
+        <div class="arsip-content">
+          <div class="arsip-line"></div>
+          <h3>Pendampingan Arsip Intensif</h3>
+          <p><img src="assets/icons/calendar-orange.svg"> 6 Februari 2026</p>
+          <p><img src="assets/icons/pin-orange.svg"> Dinas Ketahanan Pangan dan Pertanian</p>
+        </div>
+      </div>
+
+      <div class="arsip-card">
+        <img src="assets/images/arsip3.png" class="arsip-img">
+        <div class="arsip-content">
+          <div class="arsip-line"></div>
+          <h3>Pendampingan Arsip Intensif</h3>
+          <p><img src="assets/icons/calendar-orange.svg"> 6 Februari 2026</p>
+          <p><img src="assets/icons/pin-orange.svg"> Dinas Ketahanan Pangan dan Pertanian</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <div class="agenda-button">
+  <a href="sipling.html" class="btn-arsip-fill">
+    Jadwal Mobil Pendampingan Arsip
+  </a>
+
+  <a href="agendaarsip.html" class="btn-arsip-fill">
+    Lihat Semua Agenda
+  </a>
+</div>
+  </div>
+</section>
+<!-- ================= ARTIKEL & BERITA ================= -->
+<section class="artikel-berita">
+
+  <!-- ===== ARTIKEL ===== -->
+  <div class="artikel-grid">
+    <div class="artikel-col">
+      <h3 class="judul artikel">Artikel</h3>
+
+      <div class="scroll-wrapper">
+          <div class="scroll-track artikel-track">
+
+          <div class="artikel-card">
+            <img src="assets/images/artikel1.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Selasa, 30 Januari 2026
+              </div>
+              <p class="isi">Isi artikel 1</p>
+              <div class="btn-row">
+                <button class="btn orange">Selengkapnya</button>
+                <button class="btn orange">Artikel Lainnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/artikel2.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Kamis, 29 Januari 2026
+              </div>
+              <p class="isi">Isi artikel 2</p>
+              <div class="btn-row">
+                <button class="btn orange">Selengkapnya</button>
+                <button class="btn orange">Artikel Lainnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/artikel3.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Sabtu, 1 Februari 2026
+              </div>
+              <p class="isi">Isi artikel 3</p>
+              <div class="btn-row">
+                <button class="btn orange">Selengkapnya</button>
+                <button class="btn orange">Artikel Lainnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/artikel4.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Minggu, 2 Februari 2026
+              </div>
+              <p class="isi">Isi artikel 4</p>
+              <div class="btn-row">
+                <button class="btn orange">Selengkapnya</button>
+                <button class="btn orange">Artikel Lainnya</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BERITA ===== -->
+  <div class="artikel-grid berita-section">
+    <div class="artikel-col">
+      <h3 class="judul berita">Berita</h3>
+
+      <div class="scroll-wrapper">
+          <div class="scroll-track berita-track">
+
+          <div class="artikel-card">
+            <img src="assets/images/berita1.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Senin, 2 Februari 2026
+              </div>
+              <p class="isi">Isi berita 1</p>
+              <div class="btn-row">
+                <button class="btn biru">Berita Lainnya</button>
+                <button class="btn biru">Selengkapnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/berita2.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Jumat, 30 Januari 2026
+              </div>
+              <p class="isi">Isi berita 2</p>
+              <div class="btn-row">
+                <button class="btn biru">Berita Lainnya</button>
+                <button class="btn biru">Selengkapnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/berita3.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Sabtu, 1 Februari 2026
+              </div>
+              <p class="isi">Isi berita 3</p>
+              <div class="btn-row">
+                <button class="btn biru">Berita Lainnya</button>
+                <button class="btn biru">Selengkapnya</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="artikel-card">
+            <img src="assets/images/berita4.png" class="thumb">
+            <div class="artikel-info">
+              <div class="tanggal">
+                <img src="assets/icons/calendar-hitam.svg">
+                Minggu, 2 Februari 2026
+              </div>
+              <p class="isi">Isi berita 4</p>
+              <div class="btn-row">
+                <button class="btn biru">Berita Lainnya</button>
+                <button class="btn biru">Selengkapnya</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+  <!-- ===== BARIS ATAS: LOGO + NAMA ===== -->
+  <div class="footer-top">
+    <img src="assets/images/logo-dispusip.png" alt="Logo">
+    <h3>
+      Dinas Perpustakaan dan Kearsipan<br>
+      Kota Surabaya
+    </h3>
+  </div>
+
+  <!-- ===== BARIS BAWAH: 3 KOLOM ===== -->
+  <div class="footer-container">
+
+    <!-- KIRI -->
+    <div class="footer-left">
+      <ul class="footer-info">
+        <li>
+          <img src="assets/icons/phone.svg">
+          (031) 8707329
+        </li>
+        <li>
+          <img src="assets/icons/email.svg">
+          dispusip@surabaya.go.id
+        </li>
+        <li>
+          <img src="assets/icons/location.svg">
+          Jl. Tunjungan No.1–3 (Gedung Siola)<br>
+          Lantai 4, Surabaya
+        </li>
+      </ul>
+
+      <div class="footer-sosmed">
+        <div class="sosmed-title-row"></div>
+        <p>Sosial Media</p>
+        <a href="ig: https://www.instagram.com/dispusipkotasurabaya/" target="_blank" class="sosmed-item">
+  <img src="assets/icons/instagram.svg" alt="Instagram">
+  <span>@dispusipkotasurabaya</span>
+</a>
+
+<a href="yt: https://www.youtube.com/@DispusipKotaSurabaya" target="_blank" class="sosmed-item">
+  <img src="assets/icons/youtube.svg" alt="YouTube">
+  <span>@DispusipKotaSurabaya</span>
+</a>
+
+      </div>
+    </div>
+
+    <!-- TENGAH -->
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps?q=Siola+Surabaya&output=embed"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- KANAN -->
+    <div class="footer-right">
+      <h4>Link Terkait</h4>
+<ul>
+  <li>
+    › <a href="https://rumahbahasa.surabaya.go.id" target="_blank">
+      Rumah Bahasa Kota Surabaya
+    </a>
+  </li>
+
+  <li>
+    › <a href="https://pisa.surabaya.go.id" target="_blank">
+      PISA Kota Surabaya
+    </a>
+  </li>
+
+  <li>
+    › <a href="https://www.perpusnas.go.id" target="_blank">
+      Perpustakaan Nasional Republik Indonesia
+    </a>
+  </li>
+
+  <li>
+    › <a href="https://www.anri.go.id" target="_blank">
+      Arsip Nasional Republik Indonesia
+    </a>
+  </li>
+
+  <li>
+    › <a href="https://disperpusip.jatimprov.go.id" target="_blank">
+      Dinas Perpustakaan dan Kearsipan Provinsi Jawa Timur
+    </a>
+  </li>
+</ul>
+
+      <div class="visitor">
+        <p><strong>Visitors</strong></p>
+        <img src="assets/images/visitor.png" alt="Visitors">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== BOTTOM ===== -->
+  <div class="footer-bottom">
+    © 2026 Dinas Perpustakaan dan Kearsipan Kota Surabaya
+  </div>
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="js/js_beranda.js"></script>
+</body>
+</html>
