@@ -166,7 +166,7 @@ a {
 
 .hero {
   width: 100%;
-  height: calc(100vh - 80px);
+  height: 700px;
   margin-top: 50px;
   position: relative;
   overflow: hidden;
