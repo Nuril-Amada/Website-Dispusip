@@ -305,13 +305,13 @@ a {
 
 /* TRIGGER KOSONG */
 .ringkasan-trigger {
-  height: 120px;   /* pemisah scroll */
+  height: 10px;   
 }
 
 /* SPACER ANTARA POSTER & RINGKASAN */
 .spacer-biru {
   width: 100%;
-  height: 50px;
+  height: 10px;
   background: linear-gradient(
     to bottom,
     rgba(233, 251, 253, 0),
@@ -322,8 +322,9 @@ a {
 /* WRAPPER */
 .ringkasan-wrapper {
   width: 100%;
-  min-height: 80vh;
+  min-height: 50vh;
   background-color: #e9fbfd;
+  margin-top: -80px;
   padding-bottom: 50px;
 }
 
