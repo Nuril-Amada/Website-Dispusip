@@ -861,7 +861,7 @@ a {
   overflow: hidden;
   box-shadow: 0 12px 28px rgba(0,0,0,0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 400px; /* membuat semua card sama tinggi */
+  min-height: 400px;
 }
 
 .arsip-card:hover {
