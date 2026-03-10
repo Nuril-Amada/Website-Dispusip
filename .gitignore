@@ -1,0 +1,45 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+build/
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+
+# Visual Studio Code
+.vscode/
+
+# OS files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# logs
+*.log
+
+# Resharper
+_ReSharper.*
+*.DotSettings.user
+
+# node modules (if ada)
+node_modules/
+
+# その他
+*.tmp
+*.bak
+*.swp

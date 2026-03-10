@@ -34,8 +34,7 @@ def visitors_per_library(year: int):
         """), {"year": year})
 
         return result.mappings().all()
-
-
+    
 @app.get("/perpustakaan/pengunjung/{year}")
 def visitors_monthly(year: int):
     with engine.connect() as conn:

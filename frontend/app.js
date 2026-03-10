@@ -485,6 +485,7 @@ async function loadJiknSiknChart() {
   );
 }
 
+
 /* ================= LOAD ================= */
 
 function loadAll() {
