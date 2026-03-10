@@ -316,173 +316,136 @@ async function loadVisitorsChart() {
 }
 
 /* ================= ARSIP SUMMARY ================= */
-
 async function loadArsipSummary() {
   try {
+
     const data = await fetchData(`${BASE_URL}/arsip/summary/${currentYear}`);
 
+    // TOTAL
     document.getElementById("totalSikn").innerText =
       (data.total_item_sikn ?? 0).toLocaleString("id-ID");
 
     document.getElementById("totalJikn").innerText =
       (data.total_kunjungan_jikn ?? 0).toLocaleString("id-ID");
 
-    document.getElementById("growthSikn").innerText =
-      data.growth_sikn_percent !== null
-        ? data.growth_sikn_percent + "%"
-        : "-";
 
-    document.getElementById("growthJikn").innerText =
-      data.growth_jikn_percent !== null
-        ? data.growth_jikn_percent + "%"
-        : "-";
+    /* ================= SIKN ================= */
+
+    const siknPercent = data.growth_sikn_percent;
+
+    if (siknPercent === null || siknPercent === undefined) {
+
+      document.getElementById("growthSikn").innerText = "-";
+
+    } else {
+
+      const up = siknPercent > 0;
+
+      document.getElementById("growthSikn").innerText =
+        `${up ? "↑" : "↓"} ${Math.abs(siknPercent).toFixed(2)}% dari tahun lalu`;
+
+      document.getElementById("growthSikn").className =
+        up ? "growth-up" : "growth-down";
+    }
+
+
+    /* ================= JIKN ================= */
+
+    const jiknPercent = data.growth_jikn_percent;
+
+    if (jiknPercent === null || jiknPercent === undefined) {
+
+      document.getElementById("growthJikn").innerText = "-";
+
+    } else {
+
+      const up = jiknPercent > 0;
+
+      document.getElementById("growthJikn").innerText =
+        `${up ? "↑" : "↓"} ${Math.abs(jiknPercent).toFixed(2)}% dari tahun lalu`;
+
+      document.getElementById("growthJikn").className =
+        up ? "growth-up" : "growth-down";
+    }
 
   } catch (error) {
     console.error("Error loadArsipSummary:", error);
   }
 }
 
-/* ================= SKM GAUGE ================= */
-async function loadSKM() {
-  try {
-
-    const data = await fetchData(`${BASE_URL}/arsip/skm/rata-rata/${currentYear}`);
-
-    if (!data || data.message) {
-      document.getElementById("skmNilai").innerText = "-";
-      document.getElementById("skmTarget").innerText = "-";
-      document.getElementById("skmPersen").innerText = "-";
-      return;
-    }
-
-    document.getElementById("skmNilai").innerText =
-      data.nilai?.toLocaleString("id-ID") ?? "-";
-
-    document.getElementById("skmTarget").innerText =
-      data.target?.toLocaleString("id-ID") ?? "-";
-
-    document.getElementById("skmPersen").innerText =
-      data.persen_pencapaian != null
-        ? data.persen_pencapaian + "%"
-        : "-";
-
-  } catch (error) {
-    console.error("Error loadSKM:", error);
-  }
-}
-
-/* ================= SKM LINE CHART ================= */
-
-let skmChart = null;
-
-async function loadSKMChart() {
-
-  const data = await fetchData(`${BASE_URL}/arsip/skm/${currentYear}`);
-
-  const labels = data.map(d => d.bulan_singkat);
-  const nilai = data.map(d => d.nilai);
-  const target = data.map(d => d.target);
-
-  if (skmChart) skmChart.destroy();
-
-  skmChart = new Chart(
-    document.getElementById("skmChart"),
-    {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-
-          {
-            label: "Nilai",
-            data: nilai,
-            borderColor: "#2563eb",
-            backgroundColor: "rgba(37,99,235,0.1)",
-            fill: true,
-            tension: 0.4
-          },
-
-          {
-            label: "Target",
-            data: target,
-            borderColor: "#ef4444",
-            backgroundColor: "rgba(239,68,68,0.08)",
-            fill: false,
-            tension: 0.4
-          }
-
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: "bottom" }
-        },
-        scales: {
-          x: { grid: { display:false }},
-          y: { beginAtZero:true, grid:{ display:false }}
-        }
-      }
-    }
-  );
-}
-
 /* ================= JIKN vs SIKN CHART ================= */
+let arsipChart=null;
 
-let arsipChart = null;
+async function loadJiknSiknChart(){
 
-async function loadJiknSiknChart() {
+  const data=await fetchData(`${BASE_URL}/arsip/jikn-sikn/${currentYear}`);
 
-  const data = await fetchData(`${BASE_URL}/arsip/jikn-sikn/${currentYear}`);
+  const labels=data.map(d=>d.nama_bulan);
+  const jikn=data.map(d=>d.jumlah_jikn);
+  const sikn=data.map(d=>d.jumlah_sikn);
 
-  const labels = data.map(d => d.nama_bulan);
-  const jikn = data.map(d => d.jumlah_jikn);
-  const sikn = data.map(d => d.jumlah_sikn);
+  if(arsipChart) arsipChart.destroy();
 
-  if (arsipChart) arsipChart.destroy();
+  const ctx=document.getElementById("arsipChart").getContext("2d");
 
-  arsipChart = new Chart(
-    document.getElementById("arsipChart"),
-    {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-
-          {
-            label: "JIKN",
-            data: jikn,
-            borderColor: "#10b981",
-            backgroundColor: "rgba(16,185,129,0.1)",
-            fill: true,
-            tension: 0.4
-          },
-
-          {
-            label: "SIKN",
-            data: sikn,
-            borderColor: "#f59e0b",
-            backgroundColor: "rgba(245,158,11,0.1)",
-            fill: true,
-            tension: 0.4
-          }
-
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {display: false}
+  arsipChart=new Chart(ctx,{
+    type:"line",
+    data:{
+      labels:labels,
+      datasets:[
+        {
+          label:"JIKN",
+          data:jikn,
+          borderColor:"#10b981",
+          backgroundColor:"rgba(16,185,129,0.15)",
+          fill:true,
+          tension:0.4,
+          pointRadius:3,
+          pointHoverRadius:5
         },
-        scales: {
-          x: { grid: { display:false }},
-          y: { beginAtZero:true, grid:{ display:false }}
+        {
+          label:"SIKN",
+          data:sikn,
+          borderColor:"#f59e0b",
+          backgroundColor:"rgba(245,158,11,0.15)",
+          fill:true,
+          tension:0.4,
+          pointRadius:3,
+          pointHoverRadius:5
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label:function(context){
+              return context.dataset.label+": "+
+              context.raw.toLocaleString("id-ID");
+            }
+          }
+        }
+      },
+
+      scales:{
+        x:{
+          grid:{display:false}
+        },
+        y:{
+          beginAtZero:true,
+          grid:{display:false},
+          ticks:{
+            callback:value=>value.toLocaleString("id-ID")
+          }
         }
       }
     }
-  );
+  });
+
 }
 
 
@@ -496,8 +459,6 @@ function loadAll() {
   loadVisitorsChart();
   // ARSIP
   loadArsipSummary();
-  loadSKM();
-  loadSKMChart();
   loadJiknSiknChart();
 }
 

@@ -43,3 +43,7 @@ node_modules/
 *.tmp
 *.bak
 *.swp
+
+
+__pycache__/
+*.pyc
