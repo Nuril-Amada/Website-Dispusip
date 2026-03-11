@@ -337,3 +337,32 @@
   padding: 16px;
   font-size: 14px;
 }
+
+/* ================= BUTTON PUSLING ================= */
+
+.pusling-btn{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  background: white;
+  color: #FD7335;
+
+  padding: 14px 22px;
+  border-radius: 30px;
+
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.pusling-btn:hover{
+  background: #FD7335;
+  color: white;
+  transform: translateY(-3px);
+}
