@@ -166,7 +166,7 @@ a {
 
 .hero {
   width: 100%;
-  height: 700px;
+  height: 500px;
   margin-top: 50px;
   position: relative;
   overflow: hidden;
@@ -306,25 +306,14 @@ a {
 /* TRIGGER KOSONG */
 .ringkasan-trigger {
   height: 10px;   
-}
-
-/* SPACER ANTARA POSTER & RINGKASAN */
-.spacer-biru {
-  width: 100%;
-  height: 10px;
-  background: linear-gradient(
-    to bottom,
-    rgba(233, 251, 253, 0),
-    #e9fbfd
-  );
-}
+  }
 
 /* WRAPPER */
 .ringkasan-wrapper {
   width: 100%;
   min-height: 50vh;
   background-color: #e9fbfd;
-  margin-top: -80px;
+  margin-top: 40px;
   padding-bottom: 50px;
 }
 
@@ -343,37 +332,9 @@ a {
   letter-spacing: 1px;
 }
 
-/* STAT GRID */
-.stat-grid {
-  max-width: 1200px;
-  margin: 60px auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.stat-card {
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-}
-
-.stat-card h3 {
-  font-size: 60px;
-  color: #11b7c6;
-  margin-bottom: 28px;
-}
-
-.stat-card p {
-  font-size: 20px;
-  color: #000;
-  line-height: 1.6;
-}
-
 /* KEPUASAN */
 .kepuasan {
+  margin-top: 10px;
   max-width: 1200px;
   margin: 40px auto 0;
   display: flex;
@@ -1198,17 +1159,12 @@ a {
     flex-wrap: wrap;
     gap: 8px;
   }
-
-  .artikel-berita {
-  margin-bottom: 10px; /* kecilkan jarak ke footer */
-  }
-
 }
 
 /* ================ FOOTER ================= */
 .footer {
   background: #fff;
-  margin-top: 5px;
+  margin-top: -80px;
   font-family: Arial, sans-serif;
 }
 

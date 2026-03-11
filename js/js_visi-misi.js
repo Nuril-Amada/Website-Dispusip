@@ -29,3 +29,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   revealOnScroll();
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const popupElements = document.querySelectorAll(".popup");
+
+  popupElements.forEach((el, index) => {
+    setTimeout(() => {
+      el.classList.add("show");
+    }, index * 300); // muncul satu per satu
+  });
+
+});

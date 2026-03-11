@@ -142,66 +142,92 @@ body {
 
 /* ================= DIAGRAM PRESISI FIX ================= */
 
-.diagram {
-  text-align: center;
-  margin-top: 40px;
+.diagram{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
-/* LEVEL UMUM */
-.level {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  margin: 30px 0;
-  position: relative;
+/* level baris */
+.level{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:120px;
+margin:25px 0;
+}
+
+.center{
+justify-content:center;
+}
+
+/* kolom untuk tim kerja */
+.column{
+display:flex;
+flex-direction:column;
+align-items:center;   /* ini penting supaya garis center */
+gap:15px;
+}
+
+.line{
+width:4px;
+height:500px;        /* lebih pendek */
+background:#333;
+margin:10px auto;    /* auto supaya tepat di tengah */
 }
 
 /* BOX */
-.box {
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-weight: bold;
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
-  font-size: 14px;
-  width: 230px;
-  text-align: center;
+.box{
+padding:15px 20px;
+border-radius:10px;
+font-weight:bold;
+text-align:center;
+box-shadow:5px 5px 0 rgba(0,0,0,0.3);
+width:240px;
 }
 
-/* WARNA */
-.kepala { background: #f4a261; }
-.fungsional { background: #a8dadc; }
-.sekretaris { background: #bde0fe; }
-.kecil { background: #f7c59f; font-size: 12px; }
-.bidang { background: #ffe08a; font-size: 12px; }
-.bawah { background: #a8d8f0; font-size: 11px; }
+/* warna */
+.kepala{background:#f4a261;}
+.sekretaris{background:#bde0fe;}
+.fungsional{background:#a8dadc;}
+.kecil{background:#f7c59f;font-size:12px;}
+.bidang{background:#ffe08a;font-size:12px;}
+.bawah{background:#a8d8f0;font-size:11px;}
 
-/* ================= GARIS ================= */
-
-/* Garis vertikal */
-.line-vertical {
-  width: 3px;
-  height: 40px;
-  background: #444;
-  margin: 0 auto;
+/* posisi fungsional */
+.fungsional-row{
+justify-content:flex-start;
+width:100%;
+max-width:1000px;
 }
 
-/* Garis horizontal otomatis mengikuti isi */
-.level.has-line::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 5%;
-  right: 5%;
-  height: 3px;
-  background: #444;
+.sekretaris-row{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:120px;
 }
 
-/* Level paling bawah TIDAK boleh wrap */
-.level-4 {
-  flex-wrap: nowrap;
-  justify-content: center;
-  gap: 25px;
+/* Fungsional sedikit lebih bawah */
+.fungsional{
+background:#a8dadc;
+width:240px;
+height:45px;
+margin-top:20px;
+}
+
+/* Sekretaris */
+.sekretaris{
+  background:#bde0fe;
+}
+
+/* kolom sekretaris */
+.sekretaris-column{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
 }
 
 /* ================= MOBILE SUPER MINI ================= */
