@@ -94,10 +94,10 @@ async function loadSummary() {
     data.anggota ?? 0
   );
 
-    animateCountSmart(
-    document.getElementById("koleksi"),
-    data.koleksi ?? 0
-  );
+  //   animateCountSmart(
+  //   document.getElementById("koleksi"),
+  //   data.koleksi ?? 0
+  // );
 
     } catch (error) {
       console.error("Error loadSummary:", error);
