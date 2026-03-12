@@ -187,6 +187,12 @@ box-shadow:5px 5px 0 rgba(0,0,0,0.3);
 width:240px;
 }
 
+.box.kecil{
+background:#f7c59f;
+font-size:12px;
+margin-top:15px;
+}
+
 /* warna */
 .kepala{background:#f4a261;}
 .sekretaris{background:#bde0fe;}
@@ -227,7 +233,102 @@ margin-top:20px;
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:25px;
+gap:15px;
+}
+
+/* ================= GARIS STRUKTUR ================= */
+
+.garis-utama{
+width:85%;
+height:3px;
+background:#333;
+margin:60px auto 40px auto;
+}
+
+/* garis dari kepala */
+.garis-vertikal{
+width:3px;
+height:60px;
+background:#333;
+margin:auto;
+}
+
+.garis-horizontal{
+width:600px;
+height:3px;
+background:#333;
+margin:0 auto 40px auto;
+}
+
+/* garis horizontal cabang */
+.garis-cabang{
+width:350px;
+height:3px;
+background:#333;
+margin:0 auto 20px auto;
+}
+
+/* garis di atas fungsional & sekretaris */
+.garis-atas{
+width:3px;
+height:40px;
+background:#333;
+margin:auto;
+}
+
+/* garis dari sekretaris ke bawah */
+.garis-sekretaris{
+width:3px;
+height:40px;
+background:#333;
+margin:10px auto;
+}
+
+.level.popup{
+position:relative;
+}
+
+.level.popup .box.bidang{
+position:relative;
+}
+
+.level.popup .box.bidang::before{
+content:"";
+position:absolute;
+top:-40px;
+left:50%;
+transform:translateX(-50%);
+width:3px;
+height:40px;
+background:#333;
+}
+
+.column{
+position:relative;
+}
+
+.column::before{
+content:"";
+position:absolute;
+top:-40px;
+left:50%;
+transform:translateX(-50%);
+width:3px;
+height:40px;
+background:#333;
+}
+
+/* ================= FAST POPUP ================= */
+
+.popup {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================= MOBILE SUPER MINI ================= */

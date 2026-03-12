@@ -12,3 +12,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 200);
   });
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const popupElements = document.querySelectorAll(".popup");
+
+  popupElements.forEach((el, index) => {
+    setTimeout(() => {
+      el.classList.add("show");
+    }, index * 300); // muncul satu per satu
+  });
+
+});
