@@ -331,53 +331,95 @@ background:#333;
   transform: translateY(0);
 }
 
-/* ================= MOBILE SUPER MINI ================= */
+/* ================= MOBILE STRUKTUR ORGANISASI FIX ================= */
 @media (max-width: 768px) {
 
+  /* HEADER */
+  .header-organisasi h1 {
+    font-size: 22px;
+  }
+
+  /* CONTAINER */
   .struktur-container {
-    padding: 20px 5px;
+    padding: 30px 10px;
   }
 
-  /* Tetap horizontal & lebih rapat */
+  /* ================= DIAGRAM ================= */
+
+  .diagram {
+    margin-top: 20px;
+  }
+
+  /* LEVEL (TETAP HORIZONTAL, TANPA SCROLL) */
   .level {
-    gap: 6px;
-    margin: 14px 0;
-    flex-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px; /* 🔥 diperkecil */
+    margin: 15px 0;
+    flex-wrap: nowrap; /* ❌ jangan turun */
   }
 
-  /* Box super kecil */
+  /* BOX DIPERKECIL */
   .box {
-    width: 72px;              /* makin kecil */
-    padding: 6px 4px;
-    font-size: 8px;
-    border-radius: 5px;
+    width: 90px;          /* 🔥 kecil biar muat */
+    padding: 8px 6px;
+    font-size: 9px;
+    border-radius: 8px;
     box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
   }
 
-  /* Sub level lebih kecil lagi */
-  .kecil,
-  .bidang {
-    font-size: 7px;
-  }
-
+  /* variasi ukuran */
+  .box.kecil,
+  .bidang,
   .bawah {
-    font-size: 6.5px;
+    font-size: 8px;
   }
 
-  /* Garis lebih tipis & pendek */
-  .line-vertical {
-    height: 14px;
-    width: 2px;
+  /* ================= KHUSUS KEPALA BIDANG ================= */
+
+  .level.popup .box.bidang {
+    width: 85px;  /* 🔥 lebih kecil lagi biar muat semua */
   }
 
-  .level.has-line::before {
-    height: 2px;
-    top: -10px;
+  /* ================= GARIS ================= */
+
+  .garis-utama {
+    width: 90%;
+    margin: 25px auto 15px;
   }
 
-  /* Header kecil */
-  .header-organisasi h1 {
-    font-size: 18px;
+  .garis-horizontal {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+
+  .garis-cabang {
+    width: 70%;
+    margin-bottom: 10px;
+  }
+
+  .garis-vertikal {
+    height: 30px;
+  }
+
+  .garis-atas,
+  .garis-sekretaris {
+    height: 25px;
+  }
+
+  .line {
+    height: 120px;
+  }
+
+  /* ================= SEKRETARIS ================= */
+
+  .sekretaris-row {
+    gap: 10px;
+  }
+
+  .column {
+    gap: 8px;
   }
 
 }
