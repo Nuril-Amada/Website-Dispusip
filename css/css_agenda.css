@@ -213,3 +213,105 @@ body {
     height: 18px;
   }
 }
+
+/* ================= MOBILE VERSION FINAL ================= */
+@media (max-width: 768px) {
+
+  /* CONTAINER */
+  .literasi-container {
+    padding: 20px 16px;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .literasi-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* POSTER */
+  .poster {
+    max-width: 100%;
+    margin: auto;
+    display: block;
+    border-radius: 16px;
+  }
+
+  /* DESKRIPSI */
+  .desc {
+    max-width: 100%;
+    margin-top: 12px;
+  }
+
+  /* BADGE */
+  .badge {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 10px;
+  }
+
+  /* TEXT */
+  .desc-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .desc-text li {
+    margin-bottom: 4px;
+  }
+
+  /* JUDUL */
+  .right h1 {
+    font-size: 26px;
+    text-align: left;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  /* INFO CARD */
+  .info-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  /* ITEM */
+  .info-item {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  /* ICON */
+  .icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .icon-box img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* TEXT INFO */
+  .info-text p:first-child {
+    font-size: 13px;
+  }
+
+  .info-text p:last-child {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  /* BACK BUTTON */
+  .back-button {
+    width: 42px;
+    height: 42px;
+    top: 14px;
+    left: 14px;
+  }
+
+  .back-button img {
+    width: 18px;
+    height: 18px;
+  }
+
+}

@@ -603,6 +603,42 @@ a {
   width: 16px;
 }
 
+/* HILANGKAN STYLE LINK */
+.agenda-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+  position:relative;
+  z-index:10;
+}
+
+/* SEMUA STATE LINK */
+.agenda-link,
+.agenda-link:visited,
+.agenda-link:hover,
+.agenda-link:active,
+.agenda-link:focus,
+.agenda-link:focus-visible{
+  color: inherit;
+  text-decoration: none;
+  outline: none; /* 🔥 ini penting */
+}
+
+/* HILANGKAN TAP HIGHLIGHT (MOBILE) */
+.agenda-link{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* HOVER EFFECT */
+.agenda-card{
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.agenda-card:hover{
+  transform:translateY(-5px);
+}
+
 /* ================= BUTTON ================= */
 
 .agenda-button {
