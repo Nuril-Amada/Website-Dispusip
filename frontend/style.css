@@ -187,6 +187,24 @@ body {
 .dot.blue{
   background:#2f66d0; /* warna garis chart */
 }
+
+.chart-wrapper {
+  position: relative;
+}
+
+.avg-label {
+  position: absolute;
+  right: 10px;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
 /* BOTTOM 3 CARD */
 .bottom-cards {
   display: grid;

@@ -253,6 +253,10 @@ async function loadVisitorsChart() {
   const labels = data.map(d => monthNames[d.bulan - 1]);
   const totals = data.map(d => d.total);
 
+  // ================= HITUNG AVERAGE =================
+  const average = totals.reduce((a, b) => a + b, 0) / totals.length;
+  const avgLine = totals.map(() => average);
+
   if (chartInstance) chartInstance.destroy();
 
   chartInstance = new Chart(
@@ -261,58 +265,85 @@ async function loadVisitorsChart() {
       type: "line",
       data: {
         labels: labels,
-        datasets: [{
-          label: "", 
-          data: totals,
-          borderColor: "#2563eb",
-          backgroundColor: "rgba(37,99,235,0.12)",
-          fill: true,
-          tension: 0.4,
-          pointRadius: 3,
-          pointBackgroundColor: "#2563eb"
-        }]
+        datasets: [
+          {
+            label: "Pengunjung",
+            data: totals,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37,99,235,0.12)",
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3
+          },
+          {
+            label: "Rata-rata",
+            data: avgLine,
+            borderColor: "#ef4444",
+            borderDash: [6, 6],
+            fill: false,
+            pointRadius: 0,
+            tension: 0
+          }
+        ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
 
         animation: {
-        duration: 1000,
-        easing: "easeInOutCubic",
-        x: {
+          duration: 1000,
+          easing: "easeInOutCubic",
+          x: {
             type: 'number',
             duration: 1000,
             from: NaN
-        },
-        y: {
+          },
+          y: {
             type: 'number',
             duration: 1000,
             from: 0
-        }
+          }
         },
 
         plugins: {
           legend: {
-            display: false // hapus legend atas
+            display: false
           }
         },
 
         scales: {
           x: {
             grid: {
-              display: false // hapus grid X
+              display: false
             }
           },
           y: {
             beginAtZero: true,
             grid: {
-              display: false // hapus grid Y
+              display: false
             }
           }
         }
       }
     }
   );
+
+// ================= LABEL AVERAGE =================
+setTimeout(() => {
+  const yScale = chartInstance.scales.y;
+
+  if (!yScale) return;
+
+  const yPos = yScale.getPixelForValue(average);
+
+  const label = document.getElementById("avgLabel");
+  if (!label) return;
+
+  label.style.top = yPos + "px";
+  label.innerText =
+    Math.round(average).toLocaleString("id-ID");
+
+}, 500);
 }
 
 /* ================= ARSIP SUMMARY ================= */
