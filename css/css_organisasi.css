@@ -589,12 +589,6 @@ background:#333;
 /* ================= MOBILE FIX ================= */
 @media (max-width: 768px) {
 
-  /* RAPATKAN HANYA SECTION SEBELUM FOOTER */
-  .artikel-berita {
-    margin-bottom: 0 !important;
-    padding-bottom: 8px !important;
-  }
-
   /* FOOTER RAPAT KE ATAS */
   .footer {
     margin-top: 0 !important;
