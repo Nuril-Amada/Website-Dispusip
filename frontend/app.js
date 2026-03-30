@@ -1,6 +1,7 @@
 const BASE_URL = "http://127.0.0.1:8000";
 let currentYear = "2025";
 let chartInstance = null;
+let arsipJenisChart = null;
 
 /* ================= SECTION SWITCH ================= */
 
@@ -479,6 +480,83 @@ async function loadJiknSiknChart(){
 
 }
 
+/* ================= ARSIP JENIS (🔥 UTAMA) ================= */
+async function loadArsipJenisChart() {
+  const canvas = document.getElementById("arsipJenisChart");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  const periode = document.getElementById("periodeSelect")?.value || "juli";
+
+  const data = await fetchData(
+    `${BASE_URL}/arsip/periode-detail?year=${currentYear}&periode=${periode}`
+  );
+
+  if (!data || data.length === 0) {
+    console.warn("Data kosong arsip jenis");
+    return;
+  }
+
+  const labels = data.map(d => d.jenis);
+  const values = data.map(d => d.total);
+
+  const colorMap = {
+    "Tekstual Statis": "#3b82f6",
+    "Tekstual Inaktif": "#ef4444",
+    "Peta": "#10b981",
+    "Foto": "#f59e0b",
+    "Video": "#8b5cf6"
+  };
+
+  const colors = labels.map(j => colorMap[j] || "#9ca3af");
+
+  // 🔥 FIX UTAMA
+  if (arsipJenisChart && typeof arsipJenisChart.destroy === "function") {
+    arsipJenisChart.destroy();
+  }
+
+  arsipJenisChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors,
+        borderRadius: 6,
+        barThickness: 30
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: {
+          beginAtZero: true,
+          grid: { display: false },
+          ticks: {
+            callback: v => v.toLocaleString("id-ID")
+          }
+        }
+      }
+    }
+  });
+}
+
+/* ================= EVENT PERIODE ================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const periodeSelect = document.getElementById("periodeSelect");
+
+  if (periodeSelect) {
+    periodeSelect.addEventListener("change", loadArsipJenisChart);
+  }
+
+});
 
 /* ================= LOAD ================= */
 
@@ -491,6 +569,7 @@ function loadAll() {
   // ARSIP
   loadArsipSummary();
   loadJiknSiknChart();
+  loadArsipJenisChart();
 }
 
 loadAll();

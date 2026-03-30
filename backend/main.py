@@ -248,6 +248,23 @@ def get_jikn_sikn(year: int):
 
         return result.mappings().all()
     
+@app.get("/arsip/periode-detail")
+def arsip_periode_detail(year: int, periode: str):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT 
+                jenis,
+                SUM(jumlah) as total,
+                satuan
+            FROM arsip
+            WHERE tahun = :year
+            AND LOWER(periode) = LOWER(:periode)
+            GROUP BY jenis, satuan
+            ORDER BY total DESC
+        """), {"year": year, "periode": periode})
+
+        return result.mappings().all()
+
 @app.get("/")
 def root():
     return {"message": "API berjalan"}

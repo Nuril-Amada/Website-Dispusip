@@ -26,7 +26,7 @@ body {
 
 .title h1 {
   margin: 0;
-  font-size: 24px; /* sedikit lebih kecil */
+  font-size: 24px; 
   font-weight: 700;
 }
 
@@ -116,7 +116,7 @@ body {
   color: #2563eb;
   margin-top: 8px;
   font-size: 22px;
-  font-weight: 700; /* lebih proporsional */
+  font-weight: 700; 
 }
 .summary-card p {
   font-weight: 700;
@@ -358,8 +358,10 @@ ARSIP SUMMARY CARDS
 }
 
 .arsip-title {
-  font-size: 13px;
-  color: #6b7280;
+  font-size: 16px;
+  margin-top: 8px;
+  font-weight: 700;
+  color: #0e0e0e;
   margin-bottom: 8px;
 }
 
@@ -391,9 +393,7 @@ margin-top:6px;
 font-size:14px;
 }
 
-/* =========================
-CHART CONTAINER
-========================= */
+/* CHART SIKN-JIKN */
 .chart-card {
   background: white;
   border-radius: 12px;
@@ -447,9 +447,7 @@ CHART CONTAINER
 }
 
 
-/* =========================
-GRID CHART ARSIP
-========================= */
+/* GRID CHART ARSIP */
 
 .arsip-chart-grid {
   display: grid;
@@ -458,10 +456,7 @@ GRID CHART ARSIP
   margin-top: 20px;
 }
 
-
-/* =========================
-RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media (max-width: 1024px) {
 
@@ -480,7 +475,80 @@ RESPONSIVE
   .arsip-summary-grid {
     grid-template-columns: 1fr;
   }
+}
 
+/* FILTER PERIODE (CHART ARSIP) */
+
+.chart-header .year-dropdown {
+  min-width: 140px;
+}
+
+#periodeSelect {
+  display: inline-block;
+  width: auto;
+  min-width: 140px;
+  height: 36px;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  color: #1e3a8a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#periodeSelect:hover {
+  background-color: #eef2ff;
+}
+
+#periodeSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+.legend-jenis {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.legend-jenis .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* DOT BASE */
+.dot-jenis {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* WARNA PER JENIS */
+.dot-statis {
+  background: #3b82f6; /* biru */
+}
+
+.dot-inaktif {
+  background: #ef4444; /* merah */
+}
+
+.dot-peta {
+  background: #10b981; /* hijau */
+}
+
+.dot-foto {
+  background: #f59e0b; /* kuning */
+}
+
+.dot-video {
+  background: #8b5cf6; /* ungu */
 }
 
 .placeholder {
@@ -490,4 +558,98 @@ RESPONSIVE
   justify-content: center;
   color: gray;
   font-size: 14px;
+}
+
+/* ================= MOBILE RESPONSIVE MAGIC ================= */
+
+/* TABLET */
+@media (max-width: 1200px) {
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bottom-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pengunjung-clean-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .container {
+    padding: 16px;
+  }
+
+  /* HEADER JADI VERTICAL */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .title h1 {
+    font-size: 18px;
+  }
+
+  .title p {
+    font-size: 12px;
+  }
+
+  /* SUMMARY JADI 1 KOLOM */
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CHART LEBIH PENDEK */
+  .chart-wrapper {
+    height: 240px !important;
+  }
+
+  /* BOTTOM CARD JADI 1 KOLOM */
+  .bottom-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* ARSIP SUMMARY */
+  .arsip-summary {
+    grid-template-columns: 1fr;
+  }
+
+  /* FONT DIPERKECIL */
+  .summary-card h2 {
+    font-size: 18px;
+  }
+
+  .nama-line {
+    font-size: 18px;
+  }
+
+  .angka-clean {
+    font-size: 22px;
+  }
+
+  .section-toggle {
+    width: fit-content;      
+    padding: 6px;
+  }
+
+  .header-right {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
 }
