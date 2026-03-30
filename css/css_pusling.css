@@ -169,6 +169,104 @@
   color:white;
 }
 
+/* ================= MOBILE UI FIX (ONLY STYLE) ================= */
+@media (max-width: 768px) {
+
+  /* SECTION */
+  .section {
+    align-items: flex-start;
+    padding: 20px 0;
+  }
+
+  .container {
+    padding: 20px 16px;
+  }
+
+  /* TITLE */
+  .title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  /* GRID (tetap 1 kolom dari JS) */
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* ================= CARD ================= */
+  .card {
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px;
+
+    /* biar keliatan tinggi tapi gak lebay */
+    min-height: 320px;
+  }
+
+  /* HEADER */
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* BADGE */
+  .badge {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  /* INFO */
+  .info-row {
+    font-size: 16px;
+    gap: 10px;
+  }
+
+  /* ICON */
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* DESKRIPSI */
+  .card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  /* BACK BUTTON */
+  .back-button {
+    width: auto;
+    height: auto;
+    padding: 12px 16px;
+    border-radius: 50px;
+  }
+
+  .back-button img {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* BUTTON PUSLING */
+  .pusling-btn {
+    position: static;
+    display: block;
+    margin: 0 auto 20px;
+
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  /* PAGINATION */
+  .pagination button {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+
+}
+
 /* ================ FOOTER ================= */
 .footer {
   background: #fff;
