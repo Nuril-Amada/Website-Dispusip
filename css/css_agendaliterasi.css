@@ -193,6 +193,25 @@ header p{
 /* ================= MOBILE FINAL ================= */
 @media (max-width: 768px) {
 
+  /* ================= BACK BUTTON ================= */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 80px !important;   /* BESARIN TEXT */
+  padding: 40px 40px !important; /* BESARIN TOMBOL */
+  border-radius: 50px;
+
+  margin-bottom: 20px;
+}
+
+/* ICON DI DALAM BUTTON */
+.back-button img {
+  width: 40px !important;
+  height: 40px !important;
+}
+
   /* CONTAINER */
   .agenda-arsip,
   .agenda {

@@ -50,7 +50,7 @@ PAGINATION
 ========================= */
 
 let page = 1;
-const perPage = 6;
+let perPage = window.innerWidth <= 768 ? 1 : 6;
 
 function renderData(){
   const container = document.getElementById("cardContainer");
@@ -114,3 +114,9 @@ function changePage(p){
 }
 
 renderData();
+
+window.addEventListener("resize", () => {
+  perPage = window.innerWidth <= 768 ? 1 : 6;
+  page = 1;
+  render();
+});
