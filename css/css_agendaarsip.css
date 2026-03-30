@@ -190,6 +190,122 @@ header p{
   flex-shrink:0;
 }
 
+/* ================= MOBILE FINAL ================= */
+@media (max-width: 768px) {
+
+  /* CONTAINER */
+  .agenda-arsip,
+  .agenda {
+    padding: 40px 16px;
+  }
+
+  /* HEADER */
+  .arsip-header {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .arsip-header h1 {
+    font-size: 35px;
+    margin: 0;
+  }
+
+  .arsip-header p {
+    font-size: 20px;
+  }
+
+  /* GRID JADI 1 KOLOM */
+  .arsip-grid,
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* ================= CARD ================= */
+  .card,
+  .arsip-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 50px;
+    overflow: hidden;
+
+    min-height: 70vh; /* ⬅️ tinggi hampir full layar */
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* ================= GAMBAR ================= */
+  .card-img,
+  .arsip-img {
+    width: 100%;
+    height: 500px; /* ⬅️ BESAR & JELAS */
+    object-fit: cover;
+  }
+
+  /* ================= CONTENT ================= */
+  .card-content,
+  .arsip-content {
+    padding: 50px;
+  }
+
+  /* ================= JUDUL ================= */
+  .card h3,
+  .arsip-content h3 {
+    font-size: 40px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  /* ================= INFO ================= */
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .info span {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 30px;
+  }
+
+  /* ================= ICON ================= */
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* ================= DESKRIPSI ================= */
+  .card p,
+  .arsip-content p {
+    font-size: 25px;
+    line-height: 1.6;
+  }
+
+  /* ================= PAGINATION ================= */
+  .pagination {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    padding: 8px 12px;
+    font-size: 25px;
+    border-radius: 8px;
+  }
+
+}
+
 /* ================ FOOTER ================= */
 .footer{
   background:#fff;
@@ -323,115 +439,73 @@ header p{
   font-size:14px;
 }
 
-/* ================= MOBILE AGENDA ARSIP ================= */
+/* ================= MOBILE FIX ================= */
 @media (max-width: 768px) {
-
-  .agenda-arsip {
-    padding: 60px 16px;
-  }
-
-  /* HEADER */
-  .arsip-header {
-    flex-direction: column;
-    gap: 18px;
-    text-align: center;
-  }
-
-  .arsip-header h1 {
-    font-size: 36px;
-    margin-left: 0;
-    max-width: 100%;
-  }
-
-  .arsip-header p {
-    font-size: 14px;
-    max-width: 100%;
-  }
-
-  /* GRID 1 KOLOM */
-  .arsip-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    margin-top: 40px;
-  }
-
-  /* CARD CENTER & TIDAK KELEBARAN */
-  .arsip-card {
-    width: 100%;
-    max-width: 440px;   /* ⭐ kontrol lebar seperti desain kamu */
-    margin: 0 auto;     /* center */
-    border-radius: 22px;
-  }
-
-  .arsip-img {
-    height: 200px;
-  }
-
-  .arsip-content h3 {
-    font-size: 17px;
-  }
-
-  .arsip-content p {
-    font-size: 13px;
-  }
-
-  /* BUTTON */
-  .arsip-button {
-    flex-direction: row;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-  }
-
-  .btn-arsip-fill,
-  .btn-arsip-outline {
-    padding: 12px 22px;
-    font-size: 14px;
-  }
-
-}
-
-/* ================= MOBILE FOOTER 1 KOLOM ================= */
-@media (max-width: 768px) {
-
+  
+  /* FOOTER RAPAT KE ATAS */
   .footer {
-    margin-top: 0 !important;
-    padding: 20px 0 30px;
+    padding: 10px 0 20px 0 !important;
   }
 
-  /* WRAPPER LEBAR TERKONTROL */
-  .footer-top,
-  .footer-container,
-  .footer-bottom {
-    width: 92%;
-    max-width: 440px;   /* sama dengan card biar konsisten */
-    margin: 0 auto;
-  }
-
-  /* TOP */
+  /* LOGO + NAMA KE KIRI */
   .footer-top {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 14px;
-    padding: 0 0 14px 0;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 5px 15px 10px 10px;
+    margin: 0;
   }
 
   .footer-top img {
-    width: 110px;   /* logo lebih besar */
+    width: 200px; /* biar ga kegedean */
+    height: auto;
   }
 
   .footer-top h3 {
-    font-size: 20px;   /* teks lebih besar */
+    font-size: 40px !important;
+    margin: 0;
     line-height: 1.4;
+  }
+
+  /* ===== ICON (FIX UTAMA 🔥 karena pakai IMG) ===== */
+  .footer-info img,
+  .sosmed-item img {
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px;
+  }
+
+  /* ===== TEXT ITEM ===== */
+  .footer-info li,
+  .sosmed-item,
+  .footer-right li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 35px !important;
+    line-height: 1.5;
+  }
+
+  /* ===== KHUSUS SOSMED ===== */
+  .footer-sosmed p {
+    font-size: 35px !important; /* BESARIN "Sosial Media" */
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  .sosmed-item {
+    padding-left: 0;
+    font-size: 35px !important;
   }
 
   /* GRID JADI 1 KOLOM */
   .footer-container {
-    display: grid;
     grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 0;
+    padding: 10px 15px;
+    gap: 20px;
   }
 
   .footer-left,
@@ -440,43 +514,44 @@ header p{
     border: none;
   }
 
-  /* INFO */
-  .footer-info li {
-    font-size: 15px;
-  }
-
-  .sosmed-item {
-    font-size: 15px;
-    padding-left: 0;
-  }
-
-  /* MAP */
+  /* ===== MAPS (DITINGGIIN 🔥) ===== */
   .footer-map iframe {
     width: 100%;
-    height: 220px;
+    height: 300px !important;
+    border-radius: 10px;
   }
 
-  /* LINK TERKAIT */
+  /* ===== KANAN ===== */
+  .footer-right {
+    border: none;
+    padding: 0;
+  }
+
   .footer-right h4 {
-    font-size: 18px;
+    font-size: 35px !important;
+    margin-bottom: 10px;
   }
 
   .footer-right li {
-    font-size: 15px;
+    font-size: 35px !important;
   }
 
-  /* VISITOR */
+  /* ===== VISITOR ===== */
   .visitor img {
-    max-width: 260px;
+    max-width: 250px;
   }
 
-  /* COPYRIGHT */
-  .footer-bottom {
-    margin-top: 18px;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 8px;
-    text-align: center;
+  .visitor {
+    font-size: 35px;
+  }
+
+  /* ===== FOOTER BOTTOM ===== */
+  .footer-bottom{
+    background:#ff6a3d;
+    color:white;
+    text-align:center;
+    padding:12px 16px;
+    font-size:35px !important;
   }
 
 }

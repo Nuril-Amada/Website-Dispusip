@@ -44,7 +44,7 @@ const data = [
 ];
 
 let page = 1;
-const perPage = 6;
+let perPage = window.innerWidth <= 768 ? 1 : 6;
 
 function render(){
   const start = (page-1)*perPage;
@@ -115,3 +115,9 @@ function closeDetail(){
 }
 
 render();
+
+window.addEventListener("resize", () => {
+  perPage = window.innerWidth <= 768 ? 1 : 6;
+  page = 1;
+  render();
+});
