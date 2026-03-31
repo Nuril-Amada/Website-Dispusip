@@ -46,7 +46,7 @@ PAGINATION
 ========================= */
 
 let page = 1;
-let perPage = window.innerWidth <= 768 ? 1 : 6;
+let perPage = window.innerWidth <= 768 ? 4 : 6;
 
 function renderData(){
 
