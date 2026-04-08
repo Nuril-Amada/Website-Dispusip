@@ -477,86 +477,127 @@ async function loadJiknSiknChart(){
       }
     }
   });
-
 }
 
-/* ================= ARSIP JENIS (🔥 UTAMA) ================= */
+/* ================= LINE CHART ARSIP  ================= */
 async function loadArsipJenisChart() {
-  const canvas = document.getElementById("arsipJenisChart");
-  if (!canvas) return;
+  try {
+    const raw = await fetchData(
+      `${BASE_URL}/arsip/jenis-tren?year=${currentYear}`
+    );
 
-  const ctx = canvas.getContext("2d");
+    console.log("ARSIP JENIS RAW:", raw);
 
-  const periode = document.getElementById("periodeSelect")?.value || "juli";
+    // 🔥 mapping bulan urut
+    const bulanOrder = [
+      "januari","februari","maret","april","mei","juni",
+      "juli","agustus","september","oktober","november","desember"
+    ];
 
-  const data = await fetchData(
-    `${BASE_URL}/arsip/periode-detail?year=${currentYear}&periode=${periode}`
-  );
+    const bulanShort = [
+      "Jan","Feb","Mar","Apr","Mei","Jun",
+      "Jul","Agu","Sep","Okt","Nov","Des"
+    ];
 
-  if (!data || data.length === 0) {
-    console.warn("Data kosong arsip jenis");
-    return;
-  }
+    // 🔥 init object kosong
+    const statisMap = {};
+    const inaktifMap = {};
 
-  const labels = data.map(d => d.jenis);
-  const values = data.map(d => d.total);
+    raw.forEach(item => {
+      const bulan = item.bulan.toLowerCase();
 
-  const colorMap = {
-    "Tekstual Statis": "#3b82f6",
-    "Tekstual Inaktif": "#ef4444",
-    "Peta": "#10b981",
-    "Foto": "#f59e0b",
-    "Video": "#8b5cf6"
-  };
+      if (item.jenis === "Tekstual Statis") {
+        statisMap[bulan] = item.total;
+      }
 
-  const colors = labels.map(j => colorMap[j] || "#9ca3af");
+      if (item.jenis === "Tekstual Inaktif") {
+        inaktifMap[bulan] = item.total;
+      }
+    });
 
-  // 🔥 FIX UTAMA
-  if (arsipJenisChart && typeof arsipJenisChart.destroy === "function") {
-    arsipJenisChart.destroy();
-  }
+    // 🔥 susun data sesuai urutan bulan
+    const labels = bulanShort;
 
-  arsipJenisChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [{
-        data: values,
-        backgroundColor: colors,
-        borderRadius: 6,
-        barThickness: 30
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
+    const statis = bulanOrder.map(b => statisMap[b] || 0);
+    const inaktif = bulanOrder.map(b => inaktifMap[b] || 0);
+
+    if (arsipJenisChart) arsipJenisChart.destroy();
+
+    const ctx = document.getElementById("arsipJenisChart");
+
+    arsipJenisChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Tekstual Statis",
+            data: statis,
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59,130,246,0.15)",
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: "Tekstual Inaktif",
+            data: inaktif,
+            borderColor: "#ef4444",
+            backgroundColor: "rgba(239,68,68,0.15)",
+            fill: true,
+            tension: 0.4
+          }
+        ]
       },
-      scales: {
-        x: { grid: { display: false } },
-        y: {
-          beginAtZero: true,
-          grid: { display: false },
-          ticks: {
-            callback: v => v.toLocaleString("id-ID")
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { display: false },
+            beginAtZero: true,
+            ticks: {
+              callback: v => v.toLocaleString("id-ID")
+            }
           }
         }
       }
-    }
-  });
+    });
+
+  } catch (err) {
+    console.error("ERROR loadArsipJenisChart:", err);
+  }
 }
 
-/* ================= EVENT PERIODE ================= */
-document.addEventListener("DOMContentLoaded", () => {
+/* ================= SUMMARY JENIS ARSIP ================= */
+async function loadArsipJenisSummary() {
+  try {
+    const raw = await fetchData(
+      `${BASE_URL}/arsip/jenis-summary?year=${currentYear}`
+    );
 
-  const periodeSelect = document.getElementById("periodeSelect");
+    console.log("SUMMARY TAHUNAN:", raw);
 
-  if (periodeSelect) {
-    periodeSelect.addEventListener("change", loadArsipJenisChart);
+    const map = {};
+    raw.forEach(item => {
+      map[item.jenis] = item.total;
+    });
+
+    document.getElementById("totalPeta").innerText =
+      (map["Peta"] || 0).toLocaleString("id-ID");
+
+    document.getElementById("totalFoto").innerText =
+      (map["Foto"] || 0).toLocaleString("id-ID");
+
+    document.getElementById("totalVideo").innerText =
+      (map["Video"] || 0).toLocaleString("id-ID");
+
+  } catch (err) {
+    console.error("ERROR summary:", err);
   }
-
-});
+}
 
 /* ================= LOAD ================= */
 
@@ -570,6 +611,7 @@ function loadAll() {
   loadArsipSummary();
   loadJiknSiknChart();
   loadArsipJenisChart();
+  loadArsipJenisSummary();
 }
 
 loadAll();

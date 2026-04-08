@@ -159,42 +159,63 @@
       </div>
       </div>
       
-    <!-- CHART JENIS ARSIP -->
+    <!-- ================= JENIS ARSIP ================= -->
+    <div class="arsip-jenis-grid">
+
+    <!-- ===== LINE CHART ===== -->
     <div class="chart-card highlight">
+
       <div class="chart-header">
-        <h3>Jumlah Arsip Statis</h3>
-        <div class="year-dropdown">
-          <select id="periodeSelect">
-            <option value="januari">Januari</option>
-            <option value="februari">Februari</option>
-            <option value="maret">Maret</option>
-            <option value="april">April</option>
-            <option value="mei">Mei</option>
-            <option value="juni">Juni</option>
-            <option value="juli" selected>Juli</option>
-            <option value="agustus">Agustus</option>
-            <option value="september">September</option>
-            <option value="oktober">Oktober</option>
-            <option value="november">November</option>
-            <option value="desember">Desember</option>
-          </select>
-        </div>
+        <h3>Tren Arsip Tekstual</h3>
       </div>
 
       <div class="legend-jenis">
-        <span class="legend-item"><span class="dot-jenis dot-statis"></span> Tekstual Statis</span>
-        <span class="legend-item"><span class="dot-jenis dot-inaktif"></span> Tekstual Inaktif</span>
-        <span class="legend-item"><span class="dot-jenis dot-peta"></span> Peta</span>
-        <span class="legend-item"><span class="dot-jenis dot-foto"></span> Foto</span>
-        <span class="legend-item"><span class="dot-jenis dot-video"></span> Video</span>
+        <span class="legend-item">
+          <span class="dot-jenis dot-statis"></span>
+          Tekstual Statis
+        </span>
+
+        <span class="legend-item">
+          <span class="dot-jenis dot-inaktif"></span>
+          Tekstual Inaktif
+        </span>
       </div>
 
       <div class="chart-wrapper">
         <canvas id="arsipJenisChart"></canvas>
       </div>
 
+    </div>
+
+
+    <!-- ===== SUMMARY CARD ===== -->
+    <div class="arsip-side-summary">
+
+      <div class="arsip-mini-card peta">
+      <div class="card-header">
+        <p>Peta</p>
+        <img src="asset/loc.svg" class="icon-mini">
+      </div>
+      <h2 id="totalPeta">0</h2>
       </div>
 
+      <div class="arsip-mini-card foto">
+        <div class="card-header">
+          <p>Foto</p>
+          <img src="asset/photo.svg" class="icon-mini">
+        </div>
+        <h2 id="totalFoto">0</h2>
+      </div>
+
+      <div class="arsip-mini-card video">
+        <div class="card-header">
+          <p>Video</p>
+          <img src="asset/video.svg" class="icon-mini">
+        </div>
+        <h2 id="totalVideo">0</h2>
+      </div>
+    </div>
+    </div>
     </section>
 
 <script src="app.js"></script>

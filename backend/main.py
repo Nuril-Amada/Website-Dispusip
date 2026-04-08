@@ -178,43 +178,6 @@ def arsip_summary(year: int):
             "growth_sikn_percent": growth_sikn,
             "growth_jikn_percent": growth_jikn
         }
-@app.get("/arsip/skm/rata-rata/{year}")
-def skm_rata(year: int):
-    with engine.connect() as conn:
-        result = conn.execute(text("""
-            SELECT 
-                ROUND(AVG(nilai), 2) AS nilai,
-                ROUND(AVG(target), 2) AS target,
-                ROUND((AVG(nilai) / NULLIF(AVG(target), 0)) * 100, 2) AS persen_pencapaian
-            FROM skm
-            WHERE tahun = :year
-        """), {"year": year}).fetchone()
-
-        if result and result.nilai is not None:
-            return {
-                "tahun": year,
-                "nilai": float(result.nilai),
-                "target": float(result.target),
-                "persen_pencapaian": float(result.persen_pencapaian)
-            }
-
-        return {"message": "Data tidak ditemukan"}
-    
-@app.get("/arsip/skm/{year}")
-def skm_monthly(year: int):
-    with engine.connect() as conn:
-        result = conn.execute(text("""
-            SELECT 
-                EXTRACT(MONTH FROM TO_DATE(bulan::text, 'MM')) AS bulan,
-                INITCAP(TO_CHAR(TO_DATE(bulan::text, 'MM'), 'Mon')) AS bulan_singkat,
-                ROUND(nilai, 2) AS nilai,
-                ROUND(target, 2) AS target
-            FROM skm
-            WHERE tahun = :year
-            ORDER BY bulan ASC
-        """), {"year": year})
-
-        return result.mappings().all()
 
 @app.get("/arsip/jikn-sikn/{year}")
 def get_jikn_sikn(year: int):
@@ -265,6 +228,37 @@ def arsip_periode_detail(year: int, periode: str):
 
         return result.mappings().all()
 
+@app.get("/arsip/jenis-tren")
+def arsip_jenis_tren(year: int):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT 
+                LOWER(periode) as bulan,
+                jenis,
+                SUM(jumlah) as total
+            FROM arsip
+            WHERE tahun = :year
+            AND jenis IN ('Tekstual Statis', 'Tekstual Inaktif')
+            GROUP BY bulan, jenis
+        """), {"year": year})
+
+        return result.mappings().all()
+    
+@app.get("/arsip/jenis-summary")
+def arsip_jenis_summary(year: int):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT 
+                jenis,
+                SUM(jumlah) as total
+            FROM arsip
+            WHERE tahun = :year
+            AND jenis IN ('Peta', 'Foto', 'Video')
+            GROUP BY jenis
+        """), {"year": year})
+
+        return result.mappings().all()
+    
 @app.get("/")
 def root():
     return {"message": "API berjalan"}
