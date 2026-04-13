@@ -1,26 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const boxes = document.querySelectorAll(".box");
 
-  boxes.forEach((box, index) => {
-    box.style.opacity = "0";
-    box.style.transform = "translateY(20px)";
-    box.style.transition = "all 0.5s ease " + index * 0.1 + "s";
+  // ================= FADE-IN GAMBAR =================
+  const img = document.getElementById("imgStruktur");
+
+  if (img) {
+    img.style.opacity = "0";
+    img.style.transform = "translateY(30px)";
+    img.style.transition = "all 0.8s ease";
 
     setTimeout(() => {
-      box.style.opacity = "1";
-      box.style.transform = "translateY(0)";
+      img.style.opacity = "1";
+      img.style.transform = "translateY(0)";
     }, 200);
-  });
-});
 
-document.addEventListener("DOMContentLoaded", function(){
-
-  const popupElements = document.querySelectorAll(".popup");
-
-  popupElements.forEach((el, index) => {
-    setTimeout(() => {
-      el.classList.add("show");
-    }, index * 300); // muncul satu per satu
-  });
+    // ================= ZOOM CLICK =================
+    img.onclick = function () {
+      window.open(this.src, "_blank");
+    };
+  }
 
 });
