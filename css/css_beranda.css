@@ -209,6 +209,10 @@ a {
     padding: 15px 20px;
   }
 
+  .logo-equal {
+  height: 35px; 
+  }
+
   .navbar-menu {
     position: fixed;
     top: 0;
@@ -467,19 +471,18 @@ a {
   .kepuasan {
     margin: 20px auto 0;
     padding: 0 16px;
-    gap: 20px; /* dari 60 → kecil */
+    gap: 20px; 
     align-items: center;
   }
 
   /* KIRI */
   .kepuasan-left {
     flex: 1;
-    padding-left: 10px; /* dari 80 → kecil */
-    top: 0; /* ❌ hapus naik ke atas */
+    padding-left: 10px; 
   }
 
   .kepuasan-left h1 {
-    font-size: 40px; /* dari 80 → kecil */
+    font-size: 40px; 
   }
 
   .kepuasan-left p {
@@ -537,7 +540,7 @@ a {
   font-weight: 700;
   line-height: 1.1;
   max-width: 420px;
-  margin-left: 30px; /* geser kanan khusus judul */
+  margin-left: 30px; 
 }
 
 .agenda-header p {
@@ -564,7 +567,7 @@ a {
   backdrop-filter: blur(6px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  min-height: 400px; /* membuat semua card sama tinggi */
+  min-height: 400px; 
 }
 
 .agenda-card:hover {
@@ -621,7 +624,7 @@ a {
 .agenda-link:focus-visible{
   color: inherit;
   text-decoration: none;
-  outline: none; /* 🔥 ini penting */
+  outline: none; 
 }
 
 /* HILANGKAN TAP HIGHLIGHT (MOBILE) */
@@ -712,7 +715,7 @@ a {
 
   /* ================= HEADER ================= */
   .agenda-header {
-    flex-direction: column; /* 🔥 dari horizontal → vertikal */
+    flex-direction: column; 
     gap: 20px;
     text-align: center;
   }
@@ -730,20 +733,20 @@ a {
 
   /* ================= GRID ================= */
   .agenda-grid {
-    grid-template-columns: 1fr; /* 🔥 1 kolom */
+    grid-template-columns: 1fr; 
     gap: 40px;
     margin-top: 30px;
   }
 
   /* ================= CARD ================= */
   .agenda-card {
-    min-height: auto; /* biar fleksibel */
+    min-height: auto; 
     border-radius: 20px;
     margin-bottom: 20px;
   }
 
   .agenda-img {
-    height: 180px; /* dari 230 → kecil */
+    height: 180px; 
   }
 
   /* ================= CONTENT ================= */
@@ -769,13 +772,13 @@ a {
   /* ================= BUTTON ================= */
   .agenda-button {
     margin-top: 30px;
-    flex-direction: column; /* 🔥 tombol ke bawah */
+    flex-direction: column; 
     gap: 12px;
   }
 
   .btn-outline,
   .btn-fill {
-    width: 100%; /* full lebar */
+    width: 100%; 
     text-align: center;
     padding: 12px;
     font-size: 13px;
@@ -956,8 +959,8 @@ a {
 
   /* ================= GRID ================= */
   .arsip-grid {
-    grid-template-columns: 1fr; /* 🔥 1 kolom */
-    gap: 30px; /* 🔥 biar lega */
+    grid-template-columns: 1fr; 
+    gap: 30px; 
     margin-top: 30px;
   }
 
@@ -965,11 +968,11 @@ a {
   .arsip-card {
     border-radius: 22px;
     min-height: auto;
-    margin-bottom: 5px; /* tambahan biar ga nempel */
+    margin-bottom: 5px; 
   }
 
   .arsip-img {
-    height: 180px; /* dari 230 → kecil */
+    height: 180px; 
   }
 
   /* ================= CONTENT ================= */
@@ -1076,7 +1079,7 @@ a {
 
 /* ===== CARD ===== */
 .artikel-card {
-  width: calc(50% - 14px); /* 🔥 FIX: selalu 2 card */
+  width: calc(50% - 14px); 
   flex-shrink: 0;
 
   display: flex;
@@ -1164,8 +1167,8 @@ a {
   }
 
   .artikel-card {
-    width: 100%;           /* ⬅ jadi 1 kolom */
-    flex-direction: column;/* ⬅ gambar di atas */
+    width: 100%;          
+    flex-direction: column;
     gap: 12px;
   }
 
@@ -1229,7 +1232,7 @@ a {
 /* INFO KONTAK */
 .footer-info {
   list-style: none;
-  padding-left: 28px; /* 🔥 bikin konten geser ke kanan */
+  padding-left: 28px; 
   margin: 0 0 20px;
 }
 
@@ -1267,7 +1270,7 @@ a {
   gap: 12px;
   font-size: 14px;
   margin-bottom: 8px;
-  padding-left: 30px; /* 🔥 sejajar dengan teks kontak */
+  padding-left: 30px; 
 }
 
 .sosmed-item img {
@@ -1275,7 +1278,7 @@ a {
 }
 
 .footer-left {
-  padding-left: 30px; /* atur 20–50px sesuai selera */
+  padding-left: 30px; 
 }
 
 /* Sosial media ikut sejajar */
