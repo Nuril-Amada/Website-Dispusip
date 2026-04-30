@@ -76,17 +76,10 @@ def dashboard_summary(year: int):
             WHERE EXTRACT(YEAR FROM tanggal_input) = :year
         """), {"year": year}).scalar()
 
-        total_koleksi = conn.execute(text("""
-            SELECT COUNT(*)
-            FROM buku
-            WHERE EXTRACT(YEAR FROM distribusi) = :year
-        """), {"year": year}).scalar()
-
         return {
             "pengunjung": total_pengunjung,
             "peminjaman": total_peminjaman,
             "anggota": total_anggota,
-            "koleksi": total_koleksi
         }
     
 @app.get("/perpustakaan/top-books/{year}")
