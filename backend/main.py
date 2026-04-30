@@ -111,11 +111,12 @@ def latest_books(year: int):
         query = text("""
             SELECT 
                 judul,
-                tahun_terbit
-            FROM buku
-            WHERE tahun_terbit ~ '^[0-9]{4}$'
-            AND CAST(tahun_terbit AS INTEGER) = :year
-            ORDER BY distribusi DESC
+                tahun_terbit,
+                tahun_distribusi
+            FROM koleksi_buku
+            WHERE tahun_distribusi IS NOT NULL
+            AND tahun_distribusi = :year
+            ORDER BY tahun_distribusi DESC
             LIMIT 5
         """)
 
@@ -211,22 +212,22 @@ def get_jikn_sikn(year: int):
 
         return result.mappings().all()
     
-@app.get("/arsip/periode-detail")
-def arsip_periode_detail(year: int, periode: str):
-    with engine.connect() as conn:
-        result = conn.execute(text("""
-            SELECT 
-                jenis,
-                SUM(jumlah) as total,
-                satuan
-            FROM arsip
-            WHERE tahun = :year
-            AND LOWER(periode) = LOWER(:periode)
-            GROUP BY jenis, satuan
-            ORDER BY total DESC
-        """), {"year": year, "periode": periode})
+# @app.get("/arsip/periode-detail")
+# def arsip_periode_detail(year: int, periode: str):
+#     with engine.connect() as conn:
+#         result = conn.execute(text("""
+#             SELECT 
+#                 jenis,
+#                 SUM(jumlah) as total,
+#                 satuan
+#             FROM arsip
+#             WHERE tahun = :year
+#             AND LOWER(periode) = LOWER(:periode)
+#             GROUP BY jenis, satuan
+#             ORDER BY total DESC
+#         """), {"year": year, "periode": periode})
 
-        return result.mappings().all()
+#         return result.mappings().all()
 
 @app.get("/arsip/jenis-tren")
 def arsip_jenis_tren(year: int):
