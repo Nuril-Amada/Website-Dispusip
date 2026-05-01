@@ -101,7 +101,7 @@ body {
 /* SUMMARY */
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 25px;
 }
@@ -122,15 +122,6 @@ body {
   font-weight: 700;
 }
 
-/* CHART */
-.chart-card {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  margin-bottom: 25px;
-}
-
 .list-row {
   display: flex;
   justify-content: space-between;
@@ -141,20 +132,6 @@ body {
 
 .list-row:last-child {
   border-bottom: none;
-}
-
-.chart-card {
-  background: white;
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom: 25px;
-}
-
-.chart-container {
-  position: relative;
-  height: 320px;
-  width: 100%;
 }
 
 .chart-header{
@@ -188,11 +165,50 @@ body {
   background:#2f66d0; /* warna garis chart */
 }
 
-.chart-wrapper {
-  position: relative;
+/* Optional biar tinggi konsisten */
+.chart-container,
+.segmentasi-container {
+  height: 350px;
 }
 
-.avg-label {
+.row-dual {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: stretch; /* biar tinggi sama */
+}
+
+.row-dual .chart-card {
+  flex: 1;
+  margin-bottom: 0; /* override biar ga turun */
+}
+@media (max-width: 768px) {
+  .row-dual {
+    flex-direction: column;
+  }
+}
+
+.card-chart {
+  background: white;
+  border-radius: 18px;
+  padding: 24px 24px 16px 24px;
+  height: 420px;          
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container {
+  flex: 1;
+  position: relative;
+}
+.dashboard-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;              /* 🔥 ini yang ngatur spasi antar chart */
+  align-items: stretch;   /* 🔥 biar tinggi sama */
+}
+
+/* .avg-label {
   position: absolute;
   right: 10px;
   color: #ef4444;
@@ -203,7 +219,7 @@ body {
   border-radius: 6px;
   transform: translateY(-50%);
   z-index: 10;
-}
+} */
 
 /* BOTTOM 3 CARD */
 .bottom-cards {
@@ -338,42 +354,50 @@ body {
 }
 
 /* =========================
-ARSIP SUMMARY CARDS
+   ARSIP SUMMARY CARDS
 ========================= */
 .arsip-summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-top:20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 18px;
+  margin-bottom: 26px;
+  justify-content: start;  
 }
 
-.arsip-card {
-  background: white;
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+/* Card identik dengan summary-card + tinggi konsisten */
+.arsip-card{
+  background: #ffffff;
+  padding: 18px 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+  /* KUNCI supaya tinggi sama */
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.arsip-title {
-  font-size: 16px;
-  margin-top: 8px;
+/* Judul */
+.arsip-title{
+  font-size: 14px;
   font-weight: 700;
-  color: #0e0e0e;
-  margin-bottom: 8px;
+  color: #6b7280;
+  margin: 0;
 }
 
-.arsip-value {
-  font-size: 26px;
+/* Nilai angka */
+.arsip-value{
+  margin-top: 10px;
+  font-size: 24px;
   font-weight: 700;
-  color: #111827;
+  color: #2563eb;
 }
 
-.arsip-growth {
-  font-size: 13px;
-  margin-top: 6px;
+/* rapikan growth */
+.arsip-growth{
+  margin-top:6px;
+  font-size:13px;
 }
 
 .growth-up{
@@ -393,15 +417,6 @@ margin-top:6px;
 font-size:14px;
 }
 
-/* CHART SIKN-JIKN */
-.chart-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-
 .chart-title {
   font-size: 16px;
   font-weight: 600;
@@ -413,11 +428,6 @@ font-size:14px;
   justify-content:space-between;
   align-items:center;
   margin-bottom:10px;
-}
-
-.chart-wrapper{
-  position:relative;
-  height:320px;
 }
 
 .chart-legend{
@@ -439,11 +449,11 @@ font-size:14px;
 }
 
 .dot.jikn{
-  background:#10b981;
+  background:#4ADEDE;
 }
 
 .dot.sikn{
-  background:#f59e0b;
+  background:#2563eb; 
 }
 
 
@@ -664,9 +674,9 @@ font-size:14px;
   }
 
   /* CHART LEBIH PENDEK */
-  .chart-wrapper {
-    height: 240px !important;
-  }
+  /* .chart-wrapper {
+    height: 240px ;
+  } */
 
   /* BOTTOM CARD JADI 1 KOLOM */
   .bottom-cards {
@@ -701,5 +711,137 @@ font-size:14px;
     align-items: center;
     gap: 12px;
   }
+}
 
+/* ================== LAYOUT FIX  ================== */
+
+/* Samakan semua card chart */
+.chart-card{
+  background:#fff;
+  border-radius:18px;
+  padding:28px ;
+  height:460px ;
+  display:flex ;
+  flex-direction:column ;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  margin-top:0 ;
+}
+
+/* Header tidak makan tinggi chart */
+.chart-header{
+  flex-shrink:0;
+  margin-bottom:18px ;
+}
+
+/* Wrapper ambil sisa tinggi */
+.chart-wrapper{
+  flex:1 ;
+  position:relative ;
+  min-height:0;
+}
+
+/* Canvas isi penuh card TANPA gepeng */
+.chart-wrapper canvas{
+  position:absolute ;
+  inset:0 ;
+  width:100% ;
+  height:100% ;
+}
+
+/* Grid antar chart ada nafas & sejajar */
+.dashboard-row{
+  display:grid ;
+  grid-template-columns:1fr 1fr;
+  gap:28px ;
+  margin-top:28px;
+  align-items:stretch ;
+}
+
+/* Kalau ada grid arsip */
+.arsip-chart-grid{
+  display:grid ;
+  grid-template-columns:1fr 1fr;
+  gap:28px ;
+  margin-top:28px;
+}
+
+@media(max-width:768px){
+  .dashboard-row,
+  .arsip-chart-grid{
+    grid-template-columns:1fr ;
+  }
+
+  .chart-card{
+    height:340px ;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card {
+    height: 320px;
+  }
+}
+
+/* ================= FIX ROW DUAL & CHART (FINAL) ================= */
+
+/* desktop */
+.row-dual{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+  margin-top:20px;
+}
+
+/* card chart */
+.chart-card{
+  background:#fff;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  display:flex;
+  flex-direction:column;
+}
+
+/* header chart */
+.chart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+/* WRAPPER yg atur tinggi chart — BUKAN canvas */
+.chart-wrapper{
+  position:relative;
+  width:100%;
+  height:320px;
+}
+
+/* canvas JANGAN diatur height/width */
+.chart-wrapper canvas{
+  position:absolute;
+  inset:0;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:768px){
+
+  .row-dual{
+    grid-template-columns: 1fr;
+  }
+
+  .chart-wrapper{
+    height:260px;
+  }
+
+  .chart-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
 }

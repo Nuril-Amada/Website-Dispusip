@@ -50,6 +50,23 @@ def visitors_monthly(year: int):
 
         return result.mappings().all()
     
+@app.get("/perpustakaan/pekerjaan/{year}")
+def pekerjaan_distribution(year: int):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT 
+                pekerjaan,
+                COUNT(*) as total
+            FROM pengunjung
+            WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
+            AND pekerjaan IS NOT NULL
+            GROUP BY pekerjaan
+            ORDER BY total DESC
+            LIMIT 10
+        """), {"year": year})
+
+        return result.mappings().all()
+    
 @app.get("/perpustakaan/summary/{year}")
 def dashboard_summary(year: int):
     with engine.connect() as conn:
@@ -76,10 +93,13 @@ def dashboard_summary(year: int):
             WHERE EXTRACT(YEAR FROM tanggal_input) = :year
         """), {"year": year}).scalar()
 
+        avg_pengunjung = (total_pengunjung or 0) / 12
+
         return {
             "pengunjung": total_pengunjung,
             "peminjaman": total_peminjaman,
             "anggota": total_anggota,
+            "avgPengunjung": avg_pengunjung
         }
     
 @app.get("/perpustakaan/top-books/{year}")
@@ -119,45 +139,55 @@ def latest_books(year: int):
 @app.get("/arsip/summary/{year}")
 def arsip_summary(year: int):
     with engine.connect() as conn:
-
         result = conn.execute(text("""
-            WITH totals AS (
-                SELECT 
-                    tahun,
-                    SUM(jumlah) FILTER (WHERE sumber = 'sikn') AS total_sikn,
-                    SUM(jumlah) FILTER (WHERE sumber = 'jikn') AS total_jikn
-                FROM (
-                    SELECT tahun, jumlah, 'sikn' AS sumber FROM item_sikn
-                    UNION ALL
-                    SELECT tahun, jumlah, 'jikn' AS sumber FROM kunjungan_jikn
-                ) x
-                GROUP BY tahun
-            )
-            SELECT 
-                curr.total_sikn AS total_sikn_now,
-                curr.total_jikn AS total_jikn_now,
-                prev.total_sikn AS total_sikn_prev,
-                prev.total_jikn AS total_jikn_prev
-            FROM totals curr
-            LEFT JOIN totals prev
-                ON prev.tahun = curr.tahun - 1
-            WHERE curr.tahun = :year
+            SELECT
+                /* ===== SIKN & JIKN ===== */
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM item_sikn
+                    WHERE tahun = :year
+                ), 0) AS total_sikn_now,
+
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM kunjungan_jikn
+                    WHERE tahun = :year
+                ), 0) AS total_jikn_now,
+
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM item_sikn
+                    WHERE tahun = :year - 1
+                ), 0) AS total_sikn_prev,
+
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM kunjungan_jikn
+                    WHERE tahun = :year - 1
+                ), 0) AS total_jikn_prev,
+
+                /* ===== ARSIP BERDASARKAN SATUAN ===== */
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM arsip
+                    WHERE tahun = :year
+                    AND LOWER(satuan) = 'item'
+                ), 0) AS total_arsip_item,
+
+                COALESCE((
+                    SELECT SUM(jumlah)
+                    FROM arsip
+                    WHERE tahun = :year
+                    AND LOWER(satuan) = 'cd'
+                ), 0) AS total_arsip_cd
+
         """), {"year": year}).mappings().first()
 
-        if not result:
-            return {
-                "total_item_sikn": 0,
-                "total_kunjungan_jikn": 0,
-                "growth_sikn_percent": None,
-                "growth_jikn_percent": None
-            }
+        total_sikn_now = result["total_sikn_now"]
+        total_jikn_now = result["total_jikn_now"]
+        total_sikn_prev = result["total_sikn_prev"]
+        total_jikn_prev = result["total_jikn_prev"]
 
-        total_sikn_now = result["total_sikn_now"] or 0
-        total_jikn_now = result["total_jikn_now"] or 0
-        total_sikn_prev = result["total_sikn_prev"] or 0
-        total_jikn_prev = result["total_jikn_prev"] or 0
-
-        # Growth dihitung hanya jika tahun sebelumnya ada dan > 0
         growth_sikn = None
         if total_sikn_prev > 0:
             growth_sikn = round(((total_sikn_now - total_sikn_prev) / total_sikn_prev) * 100, 2)
@@ -170,7 +200,9 @@ def arsip_summary(year: int):
             "total_item_sikn": total_sikn_now,
             "total_kunjungan_jikn": total_jikn_now,
             "growth_sikn_percent": growth_sikn,
-            "growth_jikn_percent": growth_jikn
+            "growth_jikn_percent": growth_jikn,
+            "total_arsip_item": result["total_arsip_item"],
+            "total_arsip_cd": result["total_arsip_cd"]
         }
 
 @app.get("/arsip/jikn-sikn/{year}")

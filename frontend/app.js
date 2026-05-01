@@ -95,6 +95,11 @@ async function loadSummary() {
     data.anggota ?? 0
   );
 
+  animateCountSmart(
+  document.getElementById("avgPengunjung"),
+  Math.round(data.avgPengunjung ?? 0)
+  );
+
   //   animateCountSmart(
   //   document.getElementById("koleksi"),
   //   data.koleksi ?? 0
@@ -242,7 +247,6 @@ async function loadVisitorsLibrary() {
 }
 
 /* ================= LINE CHART ================= */
-
 async function loadVisitorsChart() {
   const data = await fetchData(`${BASE_URL}/perpustakaan/pengunjung/${currentYear}`);
 
@@ -255,8 +259,8 @@ async function loadVisitorsChart() {
   const totals = data.map(d => d.total);
 
   // ================= HITUNG AVERAGE =================
-  const average = totals.reduce((a, b) => a + b, 0) / totals.length;
-  const avgLine = totals.map(() => average);
+  // const average = totals.reduce((a, b) => a + b, 0) / totals.length;
+  // const avgLine = totals.map(() => average);
 
   if (chartInstance) chartInstance.destroy();
 
@@ -276,36 +280,21 @@ async function loadVisitorsChart() {
             tension: 0.4,
             pointRadius: 3
           },
-          {
-            label: "Rata-rata",
-            data: avgLine,
-            borderColor: "#ef4444",
-            borderDash: [6, 6],
-            fill: false,
-            pointRadius: 0,
-            tension: 0
-          }
+          // {
+          //   label: "Rata-rata",
+          //   data: avgLine,
+          //   borderColor: "#ef4444",
+          //   borderDash: [6, 6],
+          //   fill: false,
+          //   pointRadius: 0,
+          //   tension: 0
+          // }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-
-        animation: {
-          duration: 1000,
-          easing: "easeInOutCubic",
-          x: {
-            type: 'number',
-            duration: 1000,
-            from: NaN
-          },
-          y: {
-            type: 'number',
-            duration: 1000,
-            from: 0
-          }
-        },
-
+        animation: false,
         plugins: {
           legend: {
             display: false
@@ -330,47 +319,112 @@ async function loadVisitorsChart() {
   );
 
 // ================= LABEL AVERAGE =================
-setTimeout(() => {
-  const yScale = chartInstance.scales.y;
+// setTimeout(() => {
+//   const yScale = chartInstance.scales.y;
 
-  if (!yScale) return;
+//   if (!yScale) return;
 
-  const yPos = yScale.getPixelForValue(average);
+//   const yPos = yScale.getPixelForValue(average);
 
-  const label = document.getElementById("avgLabel");
-  if (!label) return;
+//   const label = document.getElementById("avgLabel");
+//   if (!label) return;
 
-  label.style.top = yPos + "px";
-  label.innerText =
-    Math.round(average).toLocaleString("id-ID");
+//   label.style.top = yPos + "px";
+//   label.innerText =
+//     Math.round(average).toLocaleString("id-ID");
 
-}, 500);
+// }, 500);
+}
+ // ================= CHART SEGMENTASI PEKERJAAN =================
+async function loadSegmentasiChart() {
+  try {
+    const data = await fetchData(`${BASE_URL}/perpustakaan/pekerjaan/${currentYear}`);
+
+    console.log("SEGMENTASI:", data);
+
+    const labels = data.map(d => d.pekerjaan);
+    const values = data.map(d => Number(d.total));
+
+    const ctx = document.getElementById("segmentasiChart");
+
+    if (!ctx) return;
+
+    if (window.segmentasiChartInstance) {
+      window.segmentasiChartInstance.destroy();
+    }
+
+    window.segmentasiChartInstance = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Jumlah",
+          data: values,
+          backgroundColor: "#2563eb",
+          barThickness: 16,
+          categoryPercentage: 0.9,
+          barPercentage: 0.9
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: {
+              display: false 
+            }
+          },
+          y: {
+            grid: {
+              display: false 
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error("Error segmentasi:", error);
+  }
 }
 
 /* ================= ARSIP SUMMARY ================= */
 async function loadArsipSummary() {
   try {
-
     const data = await fetchData(`${BASE_URL}/arsip/summary/${currentYear}`);
 
-    // TOTAL
+    /* ================= TOTAL SIKN & JIKN ================= */
+
     document.getElementById("totalSikn").innerText =
       (data.total_item_sikn ?? 0).toLocaleString("id-ID");
 
     document.getElementById("totalJikn").innerText =
       (data.total_kunjungan_jikn ?? 0).toLocaleString("id-ID");
 
+    /* ================= TOTAL ARSIP SATUAN ================= */
 
-    /* ================= SIKN ================= */
+    document.getElementById("totalItem").innerText =
+      (data.total_arsip_item ?? 0).toLocaleString("id-ID");
+
+    document.getElementById("totalCD").innerText =
+      (data.total_arsip_cd ?? 0).toLocaleString("id-ID");
+
+
+    /* ================= GROWTH SIKN ================= */
 
     const siknPercent = data.growth_sikn_percent;
 
     if (siknPercent === null || siknPercent === undefined) {
-
       document.getElementById("growthSikn").innerText = "-";
-
     } else {
-
       const up = siknPercent > 0;
 
       document.getElementById("growthSikn").innerText =
@@ -381,16 +435,13 @@ async function loadArsipSummary() {
     }
 
 
-    /* ================= JIKN ================= */
+    /* ================= GROWTH JIKN ================= */
 
     const jiknPercent = data.growth_jikn_percent;
 
     if (jiknPercent === null || jiknPercent === undefined) {
-
       document.getElementById("growthJikn").innerText = "-";
-
     } else {
-
       const up = jiknPercent > 0;
 
       document.getElementById("growthJikn").innerText =
@@ -428,8 +479,8 @@ async function loadJiknSiknChart(){
         {
           label:"JIKN",
           data:jikn,
-          borderColor:"#10b981",
-          backgroundColor:"rgba(16,185,129,0.15)",
+          borderColor:"#4ADEDE",
+          backgroundColor:"rgba(74,222,222,0.15)",
           fill:true,
           tension:0.4,
           pointRadius:3,
@@ -438,8 +489,8 @@ async function loadJiknSiknChart(){
         {
           label:"SIKN",
           data:sikn,
-          borderColor:"#f59e0b",
-          backgroundColor:"rgba(245,158,11,0.15)",
+          borderColor:"#2563eb",
+          backgroundColor:"rgba(37,99,235,0.15)",
           fill:true,
           tension:0.4,
           pointRadius:3,
@@ -607,6 +658,7 @@ function loadAll() {
   loadLatestBooks();   
   loadVisitorsLibrary();
   loadVisitorsChart();
+  loadSegmentasiChart();
   // ARSIP
   loadArsipSummary();
   loadJiknSiknChart();
