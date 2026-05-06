@@ -156,13 +156,16 @@ async function loadTopBooks() {
       container.innerHTML += `
         <div class="book-progress-row">
 
-          <div class="book-left">
-            <img src="asset/book.svg" class="book-icon">
-            <span class="book-title">${toTitleCase(book.judul_buku)}</span>
+          <div class="book-header">
+            <div class="book-left">
+              <img src="asset/book.svg" class="book-icon">
+              <span class="book-title">${toTitleCase(book.judul_buku)}</span>
+            </div>
+            <span class="book-count">${book.total_pinjam}</span>
           </div>
 
           <div class="progress-bar">
-            <div class="progress-fill" style="width: ${percent}%"></div>
+            <div class="progress-fill" style="width:${percent}%"></div>
           </div>
 
         </div>
@@ -416,40 +419,6 @@ async function loadArsipSummary() {
 
     document.getElementById("totalCD").innerText =
       (data.total_arsip_cd ?? 0).toLocaleString("id-ID");
-
-
-    /* ================= GROWTH SIKN ================= */
-
-    const siknPercent = data.growth_sikn_percent;
-
-    if (siknPercent === null || siknPercent === undefined) {
-      document.getElementById("growthSikn").innerText = "-";
-    } else {
-      const up = siknPercent > 0;
-
-      document.getElementById("growthSikn").innerText =
-        `${up ? "↑" : "↓"} ${Math.abs(siknPercent).toFixed(2)}% dari tahun lalu`;
-
-      document.getElementById("growthSikn").className =
-        up ? "growth-up" : "growth-down";
-    }
-
-
-    /* ================= GROWTH JIKN ================= */
-
-    const jiknPercent = data.growth_jikn_percent;
-
-    if (jiknPercent === null || jiknPercent === undefined) {
-      document.getElementById("growthJikn").innerText = "-";
-    } else {
-      const up = jiknPercent > 0;
-
-      document.getElementById("growthJikn").innerText =
-        `${up ? "↑" : "↓"} ${Math.abs(jiknPercent).toFixed(2)}% dari tahun lalu`;
-
-      document.getElementById("growthJikn").className =
-        up ? "growth-up" : "growth-down";
-    }
 
   } catch (error) {
     console.error("Error loadArsipSummary:", error);

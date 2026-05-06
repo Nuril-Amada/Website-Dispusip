@@ -111,6 +111,10 @@ def top_books(year: int):
                 COUNT(*) as total_pinjam
             FROM peminjaman
             WHERE EXTRACT(YEAR FROM tanggal_pinjam) = :year
+            AND TRIM(UPPER(lokasi)) IN (
+                'PERPUSTAKAAN RUNGKUT',
+                'PERPUSTAKAAN BALAI PEMUDA'
+            )
             GROUP BY judul_buku
             ORDER BY total_pinjam DESC
             LIMIT 5
@@ -124,12 +128,16 @@ def latest_books(year: int):
         query = text("""
             SELECT 
                 judul,
-                tahun_terbit,
-                tahun_distribusi
+                distribusi,
+                jenis_buku,
+                lokasi
             FROM koleksi_buku
-            WHERE tahun_distribusi IS NOT NULL
-            AND tahun_distribusi = :year
-            ORDER BY tahun_distribusi DESC
+            WHERE EXTRACT(YEAR FROM distribusi) = :year
+            AND lokasi IN (
+                'PERPUSTAKAAN RUNGKUT',
+                'PERPUSTAKAAN BALAI PEMUDA'
+            )
+            ORDER BY distribusi DESC
             LIMIT 5
         """)
 
