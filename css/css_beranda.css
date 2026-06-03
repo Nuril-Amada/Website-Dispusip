@@ -305,6 +305,181 @@ a {
 
 }
 
+/* ================= LAYANAN CEPAT ================= */
+
+.layanan-cepat{
+  padding:40px 30px;
+  background:#f5f6f8;
+}
+
+.layanan-grid{
+  max-width:1400px;
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+/* CARD */
+
+.service-card{
+  position:relative;
+
+  min-height:230px;
+
+  padding:35px;
+
+  border-radius:30px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #bcefff 0%,
+  #e9f8ff 55%,
+  #ffffff 100%
+  );
+
+  overflow:hidden;
+
+  box-shadow:
+  0 15px 35px rgba(0,0,0,.08);
+
+  transition:.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-8px);
+}
+
+/* dekorasi */
+
+.service-card::before{
+  content:"";
+
+  position:absolute;
+  right:-60px;
+  top:-60px;
+
+  width:180px;
+  height:180px;
+
+  border-radius:50%;
+
+  background:
+  rgba(17,183,198,.15);
+}
+
+.service-card::after{
+  content:"";
+
+  position:absolute;
+  left:-50px;
+  bottom:-50px;
+
+  width:160px;
+  height:160px;
+
+  border-radius:50%;
+
+  background:
+  rgba(17,183,198,.10);
+}
+
+/* LABEL */
+
+.service-tag{
+  display:inline-block;
+
+  padding:8px 18px;
+
+  background:#11b7c6;
+
+  color:white;
+
+  font-size:12px;
+  font-weight:600;
+
+  border-radius:6px;
+}
+
+/* JUDUL */
+
+.service-card h3{
+  margin-top:20px;
+
+  font-size:23px;
+  line-height:1.15;
+
+  color:#18406a;
+  font-weight:700;
+}
+
+/* BUTTON */
+
+.service-btn{
+  position:absolute;
+
+  left:35px;
+  bottom:30px;
+
+  width:150px;
+  height:30px;
+
+  background:white;
+
+  border-radius:40px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-decoration:none;
+
+  font-size:15px;
+  font-weight:600;
+
+  color:#4c5a78;
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,.08);
+}
+
+.service-btn:hover{
+  background:#11b7c6;
+  color:white;
+}
+
+@media(max-width:768px){
+
+  .layanan-grid{
+    grid-template-columns:1fr;
+  }
+
+  .service-card{
+    min-height:250px;
+    padding:25px;
+  }
+
+  .service-card h3{
+    font-size:23px;
+  }
+
+  .service-icon{
+    font-size:60px;
+    right:25px;
+    bottom:85px;
+  }
+
+  .service-btn{
+    width:180px;
+    height:50px;
+    font-size:18px;
+    left:25px;
+  }
+
+}
+
 /* ================= Ringkasan Statistik ================= */
 
 /* TRIGGER KOSONG */
@@ -1068,7 +1243,8 @@ a {
 /* ===== SLIDER ===== */
 .scroll-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
+  padding:20px 0;
 }
 
 .scroll-track {
@@ -1087,7 +1263,8 @@ a {
   background: #fff;
   padding: 14px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.12);
 }
 
 .thumb {
