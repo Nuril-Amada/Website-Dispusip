@@ -51,15 +51,35 @@
 
   <div class="row-dual">
     <div class="chart-card">
-      <div class="chart-header"><h3>Tren Pengunjung Bulanan</h3></div>
+      <div class="chart-header"><h3>Tren Pengunjung</h3></div>
       <div class="chart-wrapper"><canvas id="visitorsChart"></canvas></div>
     </div>
-
+   
     <div class="chart-card">
       <div class="chart-header"><h3>Segmentasi Pengunjung</h3></div>
       <div class="chart-wrapper"><canvas id="segmentasiChart"></canvas></div>
     </div>
   </div>
+   
+  <!-- FORECAST CARD -->
+  <div id="forecastSection" style="display: none; margin-top:20px;">
+
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <div>
+          <h3>Forecast Pengunjung Tahun 2026</h3>
+          <p class="forecast-subtitle">
+            Prediksi jumlah pengunjung menggunakan model Holt-winters dengan MAPE 25.30%
+          </p>
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="forecastChart"></canvas>
+      </div>
+    </div>
+    </div>
+
 
   <div class="bottom-cards">
     <div class="bottom-card">
@@ -82,6 +102,7 @@
 
 <!-- ================= KEARSIPAN ================= -->
 <section id="arsip-section" style="display:none">
+
   <!-- SUMMARY -->
   <div class="arsip-summary">
 
@@ -111,61 +132,34 @@
   <div class="chart-card">
     <div class="chart-header">
       <h3>Tren Unggah SIKN dan Kunjungan JIKN</h3>
+
       <div class="chart-legend">
-        <span class="legend-item"><span class="dot jikn"></span> JIKN</span>
-        <span class="legend-item"><span class="dot sikn"></span> SIKN</span>
+        <span class="legend-item">
+          <span class="dot jikn"></span> JIKN
+        </span>
+
+        <span class="legend-item">
+          <span class="dot sikn"></span> SIKN
+        </span>
       </div>
     </div>
+
     <div class="chart-wrapper">
       <canvas id="arsipChart"></canvas>
     </div>
   </div>
 
-  <!-- JENIS ARSIP -->
-  <div class="arsip-jenis-grid">
+  <!-- KOMPOSISI ARSIP -->
+  <div class="chart-card arsip-stacked-card">
 
-    <div class="chart-card">
-      <div class="chart-header"><h3>Tren Arsip Tekstual</h3></div>
+  <div class="chart-header">
+    <h3>Komposisi Arsip per Bulan</h3>
+  </div>
 
-      <div class="legend-jenis">
-        <span class="legend-item">
-          <span class="dot-jenis dot-statis"></span> Tekstual Statis
-        </span>
-        <span class="legend-item">
-          <span class="dot-jenis dot-inaktif"></span> Tekstual Inaktif
-        </span>
-      </div>
-
-      <div class="chart-wrapper">
-        <canvas id="arsipJenisChart"></canvas>
-      </div>
-    </div>
-
-    <div class="arsip-side-summary">
-      <div class="arsip-mini-card peta">
-        <div class="card-header">
-          <p>Peta</p>
-          <img src="asset/loc.svg" class="icon-mini">
-        </div>
-        <h2 id="totalPeta">0</h2>
-      </div>
-
-      <div class="arsip-mini-card foto">
-        <div class="card-header">
-          <p>Foto</p>
-          <img src="asset/photo.svg" class="icon-mini">
-        </div>
-        <h2 id="totalFoto">0</h2>
-      </div>
-
-      <div class="arsip-mini-card video">
-        <div class="card-header">
-          <p>Video</p>
-          <img src="asset/video.svg" class="icon-mini">
-        </div>
-        <h2 id="totalVideo">0</h2>
-      </div>
-    </div>
+  <div class="chart-wrapper-large">
+    <canvas id="arsipStackedChart"></canvas>
+  </div>
+</div>
 
   </div>
 
@@ -173,6 +167,8 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap"></script>
 <script src="app.js"></script>
 </body>
 </html>

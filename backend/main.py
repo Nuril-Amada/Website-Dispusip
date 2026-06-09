@@ -22,15 +22,33 @@ app.add_middleware(
 def visitors_per_library(year: int):
     with engine.connect() as conn:
         result = conn.execute(text("""
-            SELECT lokasi, COUNT(*) as total
-            FROM pengunjung
-            WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
-            AND (
-                UPPER(lokasi) = 'PERPUSTAKAAN BALAI PEMUDA'
-                OR
-                UPPER(lokasi) = 'PERPUSTAKAAN RUNGKUT'
-            )
+            SELECT
+                lokasi,
+                COUNT(*) AS total
+            FROM (
+                SELECT
+                    CASE
+                        WHEN UPPER(lokasi) = 'PERPUSTAKAAN BALAI PEMUDA'
+                            THEN 'Balai Pemuda'
+
+                        WHEN UPPER(lokasi) = 'PERPUSTAKAAN RUNGKUT'
+                            THEN 'Rungkut'
+
+                        WHEN UPPER(lokasi) LIKE 'TBM%'
+                            THEN 'TBM'
+                    END AS lokasi
+                FROM pengunjung
+                WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
+                AND (
+                    UPPER(lokasi) IN (
+                        'PERPUSTAKAAN BALAI PEMUDA',
+                        'PERPUSTAKAAN RUNGKUT'
+                    )
+                    OR UPPER(lokasi) LIKE 'TBM%'
+                )
+            ) x
             GROUP BY lokasi
+            ORDER BY lokasi
         """), {"year": year})
 
         return result.mappings().all()
@@ -39,11 +57,18 @@ def visitors_per_library(year: int):
 def visitors_monthly(year: int):
     with engine.connect() as conn:
         result = conn.execute(text("""
-            SELECT 
-                EXTRACT(MONTH FROM tanggal_entri) as bulan,
-                COUNT(*) as total
+            SELECT
+                EXTRACT(MONTH FROM tanggal_entri) AS bulan,
+                COUNT(*) AS total
             FROM pengunjung
             WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
+            AND (
+                UPPER(lokasi) IN (
+                    'PERPUSTAKAAN BALAI PEMUDA',
+                    'PERPUSTAKAAN RUNGKUT'
+                )
+                OR lokasi ILIKE 'TBM%'
+            )
             GROUP BY bulan
             ORDER BY bulan
         """), {"year": year})
@@ -75,9 +100,12 @@ def dashboard_summary(year: int):
             SELECT COUNT(*)
             FROM pengunjung
             WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
-            AND UPPER(lokasi) IN (
-                'PERPUSTAKAAN BALAI PEMUDA',
-                'PERPUSTAKAAN RUNGKUT'
+            AND (
+                UPPER(lokasi) IN (
+                    'PERPUSTAKAAN BALAI PEMUDA',
+                    'PERPUSTAKAAN RUNGKUT'
+                )
+                OR lokasi ILIKE 'TBM%'
             )
         """), {"year": year}).scalar()
 
@@ -93,7 +121,23 @@ def dashboard_summary(year: int):
             WHERE EXTRACT(YEAR FROM tanggal_input) = :year
         """), {"year": year}).scalar()
 
-        avg_pengunjung = (total_pengunjung or 0) / 12
+        jumlah_bulan = conn.execute(text("""
+            SELECT COUNT(DISTINCT EXTRACT(MONTH FROM tanggal_entri))
+            FROM pengunjung
+            WHERE EXTRACT(YEAR FROM tanggal_entri) = :year
+            AND (
+                UPPER(lokasi) IN (
+                    'PERPUSTAKAAN BALAI PEMUDA',
+                    'PERPUSTAKAAN RUNGKUT'
+                )
+                OR lokasi ILIKE 'TBM%'
+            )
+        """), {"year": year}).scalar()
+
+        avg_pengunjung = round(
+            (total_pengunjung or 0) /
+            (jumlah_bulan or 1)
+        )
 
         return {
             "pengunjung": total_pengunjung,
@@ -244,55 +288,101 @@ def get_jikn_sikn(year: int):
         """), {"year": year})
 
         return result.mappings().all()
-    
-# @app.get("/arsip/periode-detail")
-# def arsip_periode_detail(year: int, periode: str):
-#     with engine.connect() as conn:
-#         result = conn.execute(text("""
-#             SELECT 
-#                 jenis,
-#                 SUM(jumlah) as total,
-#                 satuan
-#             FROM arsip
-#             WHERE tahun = :year
-#             AND LOWER(periode) = LOWER(:periode)
-#             GROUP BY jenis, satuan
-#             ORDER BY total DESC
-#         """), {"year": year, "periode": periode})
 
-#         return result.mappings().all()
+@app.get("/arsip/komposisi-bulanan")
+def arsip_komposisi_bulanan(year: int):
 
-@app.get("/arsip/jenis-tren")
-def arsip_jenis_tren(year: int):
     with engine.connect() as conn:
+
         result = conn.execute(text("""
-            SELECT 
-                LOWER(periode) as bulan,
+            SELECT
+                LOWER(periode) AS bulan,
                 jenis,
-                SUM(jumlah) as total
+                SUM(jumlah) AS total
             FROM arsip
             WHERE tahun = :year
-            AND jenis IN ('Tekstual Statis', 'Tekstual Inaktif')
             GROUP BY bulan, jenis
+            ORDER BY bulan
         """), {"year": year})
 
         return result.mappings().all()
-    
-@app.get("/arsip/jenis-summary")
-def arsip_jenis_summary(year: int):
+
+@app.get("/arsip/treemap-tekstual")
+def arsip_treemap_tekstual(year: int):
+
     with engine.connect() as conn:
         result = conn.execute(text("""
-            SELECT 
+            SELECT
                 jenis,
-                SUM(jumlah) as total
+                SUM(jumlah) AS total
             FROM arsip
             WHERE tahun = :year
-            AND jenis IN ('Peta', 'Foto', 'Video')
+            AND jenis IN (
+                'Tekstual Statis',
+                'Tekstual Inaktif'
+            )
             GROUP BY jenis
         """), {"year": year})
 
         return result.mappings().all()
     
+@app.get("/arsip/treemap-media")
+def arsip_treemap_media(year: int):
+
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT
+                jenis,
+                SUM(jumlah) AS total
+            FROM arsip
+            WHERE tahun = :year
+            AND jenis IN (
+                'Peta',
+                'Foto',
+                'Video'
+            )
+            GROUP BY jenis
+        """), {"year": year})
+
+        return result.mappings().all()
+    
+@app.get("/perpustakaan/forecast")
+def get_forecast():
+
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT
+                CASE EXTRACT(MONTH FROM ds)
+
+                    WHEN 1 THEN 'Jan'
+                    WHEN 2 THEN 'Feb'
+                    WHEN 3 THEN 'Mar'
+                    WHEN 4 THEN 'Apr'
+                    WHEN 5 THEN 'Mei'
+                    WHEN 6 THEN 'Jun'
+                    WHEN 7 THEN 'Jul'
+                    WHEN 8 THEN 'Agu'
+                    WHEN 9 THEN 'Sep'
+                    WHEN 10 THEN 'Okt'
+                    WHEN 11 THEN 'Nov'
+                    WHEN 12 THEN 'Des'
+
+                END AS nama_bulan,
+
+                ROUND(
+                    yhat::numeric,
+                    0
+                ) AS prediksi
+
+            FROM pengunjung_2026
+
+            WHERE EXTRACT(YEAR FROM ds) = 2026
+
+            ORDER BY ds
+        """))
+
+        return result.mappings().all()  
+
 @app.get("/")
 def root():
     return {"message": "API berjalan"}

@@ -2,6 +2,10 @@ const BASE_URL = "http://127.0.0.1:8000";
 let currentYear = "2025";
 let chartInstance = null;
 let arsipJenisChart = null;
+let forecastChartInstance = null;
+let treemapTekstualChart = null;
+let treemapMediaChart = null;
+let arsipStackedChart = null;
 
 /* ================= SECTION SWITCH ================= */
 
@@ -109,11 +113,11 @@ async function loadSummary() {
       console.error("Error loadSummary:", error);
     }
 
-  // CARD BAWAH: JUMLAH PENGUNJUNG PERPUS
-  const totalBottom = document.getElementById("pengunjungPerpus");
-  if (totalBottom) {
-    totalBottom.innerText = data.pengunjung.toLocaleString();
-  }
+    // CARD BAWAH: JUMLAH PENGUNJUNG PERPUS
+    const totalBottom = document.getElementById("pengunjungPerpus");
+    if (totalBottom) {
+      totalBottom.innerText = data.pengunjung.toLocaleString();
+    }
 }
 
 function toTitleCase(text) {
@@ -208,7 +212,7 @@ async function loadLatestBooks() {
   }
 }
 
-/* ================= VISITOR PER LOKASI ================= */
+//* ================= VISITOR PER LOKASI ================= */
 async function loadVisitorsLibrary() {
 
   const data = await fetchData(
@@ -224,6 +228,10 @@ async function loadVisitorsLibrary() {
 
   const rungkut = data.find(d =>
     d.lokasi.toUpperCase().includes("RUNGKUT")
+  )?.total || 0;
+
+  const tbm = data.find(d =>
+    d.lokasi.toUpperCase().includes("TBM")
   )?.total || 0;
 
   container.innerHTML = `
@@ -245,6 +253,14 @@ async function loadVisitorsLibrary() {
         </div>
       </div>
 
+      <div class="perpus-clean tbm">
+        <div class="nama-line">Taman Baca</div>
+        <div class="nama-line highlight">Masyarakat</div>
+        <div class="angka-clean">
+          ${tbm.toLocaleString("id-ID")}
+        </div>
+      </div>
+
     </div>
   `;
 }
@@ -262,8 +278,9 @@ async function loadVisitorsChart() {
   const totals = data.map(d => d.total);
 
   // ================= HITUNG AVERAGE =================
-  // const average = totals.reduce((a, b) => a + b, 0) / totals.length;
-  // const avgLine = totals.map(() => average);
+  const totalVisitors =totals.reduce((a, b) => a + b, 0);
+  const average = Math.round(totalVisitors / 12);
+  const avgLine = totals.map(() => average);
 
   if (chartInstance) chartInstance.destroy();
 
@@ -283,15 +300,17 @@ async function loadVisitorsChart() {
             tension: 0.4,
             pointRadius: 3
           },
-          // {
-          //   label: "Rata-rata",
-          //   data: avgLine,
-          //   borderColor: "#ef4444",
-          //   borderDash: [6, 6],
-          //   fill: false,
-          //   pointRadius: 0,
-          //   tension: 0
-          // }
+          {
+            label: "Rata-rata",
+            data: avgLine,
+            borderColor: "#ef4444",
+            borderDash: [6, 6],
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 6,
+            hitRadius: 30,
+            tension: 0
+          }
         ]
       },
       options: {
@@ -301,19 +320,37 @@ async function loadVisitorsChart() {
         plugins: {
           legend: {
             display: false
+          },
+          tooltip: {
+            callbacks: {
+            label: function(context) {
+              const value =
+                Math.round(context.raw)
+                .toLocaleString("id-ID");
+
+              if (
+                context.dataset.label ===
+                "Rata-rata"
+              ) {
+                return `Rata-rata: ${value}`;
+              }
+
+              return `Pengunjung: ${value}`;
+            }
           }
-        },
+        }
+      },
 
         scales: {
           x: {
             grid: {
-              display: false
+              display: true
             }
           },
           y: {
             beginAtZero: true,
             grid: {
-              display: false
+              display: true
             }
           }
         }
@@ -322,22 +359,195 @@ async function loadVisitorsChart() {
   );
 
 // ================= LABEL AVERAGE =================
-// setTimeout(() => {
-//   const yScale = chartInstance.scales.y;
+setTimeout(() => {
+  const yScale = chartInstance.scales.y;
 
-//   if (!yScale) return;
+  if (!yScale) return;
 
-//   const yPos = yScale.getPixelForValue(average);
+  const yPos = yScale.getPixelForValue(average);
 
-//   const label = document.getElementById("avgLabel");
-//   if (!label) return;
+  const label = document.getElementById("avgLabel");
+  if (!label) return;
 
-//   label.style.top = yPos + "px";
-//   label.innerText =
-//     Math.round(average).toLocaleString("id-ID");
+  label.style.top = yPos + "px";
+  label.innerText =
+    average.toLocaleString("id-ID");
 
-// }, 500);
+}, 500);
 }
+
+/* ================= FORECAST CHART ================= */
+async function loadForecastChart() {
+
+  const section =
+    document.getElementById("forecastSection");
+
+  // forecast hanya tampil saat filter tahun 2025
+  if (currentYear != "2025") {
+
+    section.style.display = "none";
+
+    if (forecastChartInstance) {
+      forecastChartInstance.destroy();
+    }
+
+    return;
+  }
+
+  section.style.display = "block";
+
+  try {
+
+    const data = await fetchData(
+      `${BASE_URL}/perpustakaan/forecast`
+    );
+
+    // ================= LABEL =================
+    const labels =
+      data.map(d => d.nama_bulan);
+
+    // ================= VALUE =================
+    const values =
+      data.map(d => Number(d.prediksi));
+
+    // ================= AVERAGE =================
+    const average = Math.round(
+      values.reduce((a, b) => a + b, 0) / values.length
+    );
+
+    const avgLine =
+      values.map(() => average);
+
+    // ================= DESTROY OLD CHART =================
+    if (forecastChartInstance) {
+      forecastChartInstance.destroy();
+    }
+
+    // ================= CREATE CHART =================
+    forecastChartInstance = new Chart(
+      document.getElementById("forecastChart"),
+      {
+        type: "line",
+
+        data: {
+          labels: labels,
+
+          datasets: [
+
+            // FORECAST
+            {
+              label: "Forecast 2026",
+
+              data: values,
+
+              borderColor: "#10b981",
+              backgroundColor: "rgba(16,185,129,0.12)",
+
+              fill: true,
+              tension: 0.4,
+
+              pointRadius: 3,
+              pointHoverRadius: 5
+            },
+
+            // AVERAGE
+            {
+              label: "Rata-rata",
+              data: avgLine,
+              borderColor: "#ef4444",
+              borderDash: [6,6],
+              fill: false,
+              tension: 0,
+              pointRadius: 0,
+              pointHoverRadius: 6,
+              hitRadius: 30,
+            }
+          ]
+        },
+
+        options: {
+
+          responsive: true,
+          maintainAspectRatio: false,
+
+          plugins: {
+
+            legend: {
+              display: false
+            },
+
+          tooltip: {
+
+            backgroundColor: "#111827",
+            titleColor: "#ffffff",
+            bodyColor: "#ffffff",
+
+            padding: 12,
+
+            cornerRadius: 10,
+
+            displayColors: true,
+
+            callbacks: {
+
+              label: function(context) {
+
+                const value =
+                  Number(context.raw)
+                  .toLocaleString("id-ID");
+
+                // popup garis merah
+                if (
+                  context.dataset.label ===
+                  "Rata-rata"
+                ) {
+
+                  return `Rata-rata Pengunjung: ${value}`;
+                }
+
+                // popup garis forecast
+                return `Forecast Pengunjung: ${value}`;
+              }
+            }
+          },
+          },
+
+          scales: {
+
+            x: {
+              grid: {
+                display: true
+              }
+            },
+
+            y: {
+
+              beginAtZero: true,
+
+              grid: {
+                display: true
+              },
+
+              ticks: {
+                callback: value =>
+                  Number(value)
+                  .toLocaleString("id-ID")
+              }
+            }
+          }
+        }
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Error loadForecastChart:",
+      error
+    );
+  }
+}
+
  // ================= CHART SEGMENTASI PEKERJAAN =================
 async function loadSegmentasiChart() {
   try {
@@ -377,12 +587,12 @@ async function loadSegmentasiChart() {
           x: {
             beginAtZero: true,
             grid: {
-              display: false 
+              display: true 
             }
           },
           y: {
             grid: {
-              display: false 
+              display: true 
             }
           }
         },
@@ -485,11 +695,11 @@ async function loadJiknSiknChart(){
 
       scales:{
         x:{
-          grid:{display:false}
+          grid:{display:true}
         },
         y:{
           beginAtZero:true,
-          grid:{display:false},
+          grid:{display:true},
           ticks:{
             callback:value=>value.toLocaleString("id-ID")
           }
@@ -499,124 +709,158 @@ async function loadJiknSiknChart(){
   });
 }
 
-/* ================= LINE CHART ARSIP  ================= */
-async function loadArsipJenisChart() {
-  try {
-    const raw = await fetchData(
-      `${BASE_URL}/arsip/jenis-tren?year=${currentYear}`
+
+/* ================= KOMPOSISI JENIS ARSIP ================= */
+async function loadArsipStackedChart() {
+
+  const response = await fetch(
+    `${BASE_URL}/arsip/komposisi-bulanan?year=${currentYear}`
+  );
+
+  const data = await response.json();
+
+  console.log("ARSIP STACKED:", data);
+
+  const bulanUrut = [
+    "jan","feb","mar","apr","mei","jun",
+    "jul","agu","sep","okt","nov","des"
+  ];
+
+  const labels = [
+    "Jan","Feb","Mar","Apr","Mei","Jun",
+    "Jul","Agu","Sep","Okt","Nov","Des"
+  ];
+
+  const statis = new Array(12).fill(0);
+  const inaktif = new Array(12).fill(0);
+  const peta = new Array(12).fill(0);
+  const foto = new Array(12).fill(0);
+  const video = new Array(12).fill(0);
+
+  data.forEach(item => {
+
+    const idx = bulanUrut.indexOf(
+      item.bulan.substring(0,3).toLowerCase()
     );
 
-    console.log("ARSIP JENIS RAW:", raw);
+    if(idx === -1) return;
 
-    // 🔥 mapping bulan urut
-    const bulanOrder = [
-      "januari","februari","maret","april","mei","juni",
-      "juli","agustus","september","oktober","november","desember"
-    ];
+    switch(item.jenis){
 
-    const bulanShort = [
-      "Jan","Feb","Mar","Apr","Mei","Jun",
-      "Jul","Agu","Sep","Okt","Nov","Des"
-    ];
+      case "Tekstual Statis":
+        statis[idx] = item.total;
+        break;
 
-    // 🔥 init object kosong
-    const statisMap = {};
-    const inaktifMap = {};
+      case "Tekstual Inaktif":
+        inaktif[idx] = item.total;
+        break;
 
-    raw.forEach(item => {
-      const bulan = item.bulan.toLowerCase();
+      case "Peta":
+        peta[idx] = item.total;
+        break;
 
-      if (item.jenis === "Tekstual Statis") {
-        statisMap[bulan] = item.total;
-      }
+      case "Foto":
+        foto[idx] = item.total;
+        break;
 
-      if (item.jenis === "Tekstual Inaktif") {
-        inaktifMap[bulan] = item.total;
-      }
-    });
+      case "Video":
+        video[idx] = item.total;
+        break;
+    }
 
-    // 🔥 susun data sesuai urutan bulan
-    const labels = bulanShort;
+  });
 
-    const statis = bulanOrder.map(b => statisMap[b] || 0);
-    const inaktif = bulanOrder.map(b => inaktifMap[b] || 0);
+  const ctx =
+    document.getElementById("arsipStackedChart");
 
-    if (arsipJenisChart) arsipJenisChart.destroy();
+  if(arsipStackedChart){
+    arsipStackedChart.destroy();
+  }
 
-    const ctx = document.getElementById("arsipJenisChart");
+  arsipStackedChart = new Chart(ctx, {
 
-    arsipJenisChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Tekstual Statis",
-            data: statis,
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59,130,246,0.15)",
-            fill: true,
-            tension: 0.4
-          },
-          {
-            label: "Tekstual Inaktif",
-            data: inaktif,
-            borderColor: "#ef4444",
-            backgroundColor: "rgba(239,68,68,0.15)",
-            fill: true,
-            tension: 0.4
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
+    type: "bar",
+
+    data: {
+
+      labels,
+
+      datasets: [
+
+        {
+          label: "Tekstual Inaktif",
+          data: inaktif,
+          backgroundColor: "#2563eb"
         },
-        scales: {
-          x: { grid: { display: false } },
-          y: { grid: { display: false },
-            beginAtZero: true,
-            ticks: {
-              callback: v => v.toLocaleString("id-ID")
+
+        {
+          label: "Tekstual Statis",
+          data: statis,
+          backgroundColor: "#60a5fa"
+        },
+
+        {
+          label: "Peta",
+          data: peta,
+          backgroundColor: "#10b981"
+        },
+
+        {
+          label: "Foto",
+          data: foto,
+          backgroundColor: "#f59e0b"
+        },
+
+        {
+          label: "Video",
+          data: video,
+          backgroundColor: "#8b5cf6"
+        }
+
+      ]
+    },
+
+    options: {
+
+      responsive: true,
+      maintainAspectRatio: false,
+
+      plugins: {
+
+        legend: {
+          position: "top"
+        },
+
+        tooltip: {
+          mode: "index",
+          intersect: false
+        }
+      },
+
+      scales: {
+
+        x: {
+          stacked: true,
+          grid: {
+            display: false
+          }
+        },
+
+        y: {
+          stacked: true,
+          beginAtZero: true,
+
+          ticks: {
+            callback(value){
+              return value.toLocaleString("id-ID");
             }
           }
         }
+
       }
-    });
+    }
+  });
 
-  } catch (err) {
-    console.error("ERROR loadArsipJenisChart:", err);
-  }
-}
-
-/* ================= SUMMARY JENIS ARSIP ================= */
-async function loadArsipJenisSummary() {
-  try {
-    const raw = await fetchData(
-      `${BASE_URL}/arsip/jenis-summary?year=${currentYear}`
-    );
-
-    console.log("SUMMARY TAHUNAN:", raw);
-
-    const map = {};
-    raw.forEach(item => {
-      map[item.jenis] = item.total;
-    });
-
-    document.getElementById("totalPeta").innerText =
-      (map["Peta"] || 0).toLocaleString("id-ID");
-
-    document.getElementById("totalFoto").innerText =
-      (map["Foto"] || 0).toLocaleString("id-ID");
-
-    document.getElementById("totalVideo").innerText =
-      (map["Video"] || 0).toLocaleString("id-ID");
-
-  } catch (err) {
-    console.error("ERROR summary:", err);
-  }
 }
 
 /* ================= LOAD ================= */
@@ -627,12 +871,12 @@ function loadAll() {
   loadLatestBooks();   
   loadVisitorsLibrary();
   loadVisitorsChart();
+  loadForecastChart();
   loadSegmentasiChart();
   // ARSIP
   loadArsipSummary();
   loadJiknSiknChart();
-  loadArsipJenisChart();
-  loadArsipJenisSummary();
+  loadArsipStackedChart();
 }
 
 loadAll();
